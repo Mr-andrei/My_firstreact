@@ -1,26 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from "./Header/Header";
+import Profile from "./Profile/Profile";
+import NavBar from "./NavBar/NavBar";
+import Dialogs from "./Massages/Dialogs";
+import {BrowserRouter} from "react-router-dom";
+
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+        <div className="grid_container">
+            <Header/>
+            <NavBar/>
+            <Route />
+        </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
