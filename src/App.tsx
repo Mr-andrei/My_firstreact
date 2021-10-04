@@ -5,19 +5,20 @@ import Header from "./Header/Header";
 import Profile from "./Profile/Profile";
 import NavBar from "./NavBar/NavBar";
 import Dialogs from "./Massages/Dialogs";
-import {BrowserRouter} from "react-router-dom";
-
-
+import {BrowserRouter, Route} from "react-router-dom";
 
 
 function App() {
     return (
         <BrowserRouter>
-        <div className="grid_container">
-            <Header/>
-            <NavBar/>
-            <Route />
-        </div>
+            <div className="grid_container">
+                <Header/>
+                <NavBar/>
+                <div className={"content"}>
+                    <Route path='/Dialogs' component={Dialogs}/>
+                    <Route path='/Profile' component={Profile}/>
+                </div>
+            </div>
         </BrowserRouter>
     );
 }

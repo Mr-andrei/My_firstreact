@@ -12,8 +12,12 @@
     display: grid;
     grid-template-areas:
      "header header"
-    "navbar profile";
+    "navbar content";
     grid-template-rows: 70px 1fr;
     grid-template-columns: 230px 10fr;
     grid-gap: 10px;
+}
+
+.content{
+    grid-area: content ;
 }
