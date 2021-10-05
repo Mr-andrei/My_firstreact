@@ -1,0 +1,14 @@
+
+.container{
+    display: grid;
+    /*grid-template-rows: 70px 1fr;*/
+    grid-template-columns: 2fr 10fr;
+    margin: 15px 0 0 15px;
+}
+
+.user, .massege{
+    margin-bottom: 9px;
+    font-size: 15px;
+    font-family: Arial;
+}
+
