@@ -9,13 +9,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
-import {addPost, changeTextArea, postsType, state, stateType} from "./redux/state";
+import {addPostType, changePostType, store} from "./redux/state";
+import {stateType} from "./redux/state";
 
 
 type dialogsType = {
     state: stateType
-    addPost: () => void
-    changeTextArea: (text:string) => void
+    /*  addPost: () => void
+      changeTextArea: (text:string) => void*/
+    dispatch: (action: addPostType | changePostType) => void
 
 }
 
@@ -30,8 +32,10 @@ function App(props: dialogsType) {
                     <Route path='/Dialogs'
                            render={() => <Dialogs message={props.state.mesageData} dialog={props.state.dialogsData}/>}/>
                     <Route path='/Profile' render={() => <Profile posts={props.state.postsdata}
-                                                                  addPost={props.addPost}
-                                                                  changeTextArea={changeTextArea}
+                                                                  dispatch={props.dispatch}
+                        /* addPost={props.addPost}
+                         changeTextArea={props.changeTextArea}*/
+
                     />}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Setting' render={() => <Setting/>}/>

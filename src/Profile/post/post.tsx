@@ -1,11 +1,13 @@
-import {postsType, state, stateType} from "../../redux/state";
-import React, {ChangeEvent, ChangeEventHandler} from "react";
+import {addPostType, changePostType, postsType} from "../../redux/state";
+import React, {ChangeEvent} from "react";
+import {type} from "os";
 
 
 type postdataPropsType = {
     postdata: Array<postsType>
-    addPost: () => void
-    changeTextArea: (text:string) => void
+    /*addPost: () => void
+    changeTextArea: (text:string) => void*/
+    dispatch: (action: addPostType | changePostType) => void
 }
 
 
@@ -15,11 +17,11 @@ export const Post = (props: postdataPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-       props.addPost()
-        props.changeTextArea("")
+       props.dispatch({type:"ADD-POST"})
+       /* props.dispatch({type:"CHANGE-TEXT-AREA"})*/
     }
     const changePost = (e:ChangeEvent<HTMLTextAreaElement>) => {
-       props.changeTextArea( e.currentTarget.value)
+       props.dispatch({type: "CHANGE-TEXT-AREA", text: e.currentTarget.value})
     }
 
 

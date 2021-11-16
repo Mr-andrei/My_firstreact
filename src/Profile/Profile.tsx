@@ -1,12 +1,13 @@
 import cl from './Profile.module.css'
 import {Post} from "./post/post";
-import {changeTextArea, postsType, stateType} from "../redux/state";
+import {addPostType, changePostType, postsType, stateType} from "../redux/state";
 
 
 type postsPropsType = {
     posts: Array<postsType>
-    addPost: () => void
-    changeTextArea: (text:string) => void
+    /*addPost: () => void
+    changeTextArea: (text:string) => void*/
+    dispatch: (action: addPostType | changePostType) => void
 }
 
 const Profile = (props: postsPropsType) => {
@@ -23,9 +24,10 @@ const Profile = (props: postsPropsType) => {
                </ul>
            </div>
             <Post
-                changeTextArea={changeTextArea}
                 postdata={props.posts}
-                  addPost={props.addPost}/>
+                dispatch={props.dispatch}
+               /* changeTextArea={props.changeTextArea}
+                  addPost={props.addPost}*//>
         </div>
     )
 }
