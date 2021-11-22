@@ -17,8 +17,8 @@ export const Post = (props: postdataPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-       props.dispatch({type:"ADD-POST"})
-       /* props.dispatch({type:"CHANGE-TEXT-AREA"})*/
+       props.dispatch({type:"ADD-POST"} )
+
     }
     const changePost = (e:ChangeEvent<HTMLTextAreaElement>) => {
        props.dispatch({type: "CHANGE-TEXT-AREA", text: e.currentTarget.value})
@@ -38,6 +38,7 @@ export const Post = (props: postdataPropsType) => {
     return (
         <div>
             <textarea
+
                onChange={changePost}
                 ref={newPostElement}></textarea>
             <button onClick={addPost}>Add post</button>
