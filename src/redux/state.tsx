@@ -1,132 +1,145 @@
+
+import {PostReduser} from './postReduser';
+import {MessageReducer} from "./messagesReduser";
+
 let renderChange = (state: stateType) => {
+}
+
+// dialogs type
+type PagesdialogsDataType = {
+    dialogsData: Array<dialogsDataType>
 }
 type dialogsDataType = {
     id: number
     name: string
 }
-type  mesageDataType = {
+
+//messages type
+export type messagesPagesType = {
+    mesageData: Array<mesageDataType>
+    nextMassege: string
+}
+export type  mesageDataType = {
     id: number
     message: string
 }
-
+//Post Type
+export type postPagesDataType = {
+    postsdata: Array<postsType>
+    nextPost: string
+}
 export type postsType = {
     id: number
     text: string
     likecount: number
 }
+//State Type
 export type  stateType = {
-    dialogsData: Array<dialogsDataType>
-    mesageData: Array<mesageDataType>
-    postsdata: Array<postsType>
-    nextPost: string
-    nextMassege:string
+    dialogPages: PagesdialogsDataType
+    messagesPages: messagesPagesType
+    postPagesData: postPagesDataType
 }
-
-export type ActionsTypes = addPostType | changePostType | newMassage | ChangeMessageText
-
 type storeType = {
     state: stateType
-   /* addPost: () => void
-    changeTextArea: (text: string) => void*/
     subscribe: (observer: (state: stateType) => void) => void
-    getState : () => stateType
-    dispatch: (action: ActionsTypes  ) => void
+    getState: () => stateType
+    dispatch: (action: ActionsTypes) => void
 }
 
-export type addPostType ={
+//Action Type
+export type ActionsTypes = addPostType | changePostType | newMassage | ChangeMessageText
+
+export type addPostType = {
     type: "ADD-POST"
-
 }
-export type changePostType ={
+export type changePostType = {
     type: "CHANGE-TEXT-AREA"
     text: string
 }
-
 export type newMassage = {
-    type:"SEND-NEW-MASSEGE"
+    type: "SEND-NEW-MASSEGE"
 }
-export type ChangeMessageText ={
-    type:"CHANGE-MASSEGE-TEXT"
-    text:string
+export type ChangeMessageText = {
+    type: "CHANGE-MASSEGE-TEXT"
+    text: string
 }
 
 
-export let store: storeType ={
+export let store: storeType = {
     state: {
-        dialogsData: [
-            {id: 1, name: "Andrei"},
-            {id: 2, name: "Nick"},
-            {id: 3, name: "Olga"},
-            {id: 4, name: "Dimych"},
-            {id: 5, name: "Vika"},
-        ],
-        mesageData: [
-            {id: 1, message: "What do yo want"},
-            {id: 2, message: "What is yor name"},
-            {id: 3, message: "How are you"},
-            {id: 4, message: "My name is..."},
-            {id: 5, message: "Hi"},
-        ],
-        nextMassege:"",
-        postsdata: [
-            {id: 1, text: "like", likecount: 123},
-            {id: 2, text: "yo", likecount: 124},
-            {id: 3, text: "dontLike", likecount: 125},
-        ],
-        nextPost: "",
-
+        dialogPages: {
+            dialogsData: [
+                {id: 1, name: "Andrei"},
+                {id: 2, name: "Nick"},
+                {id: 3, name: "Olga"},
+                {id: 4, name: "Dimych"},
+                {id: 5, name: "Vika"},
+            ]
+        },
+        messagesPages: {
+            mesageData: [
+                {id: 1, message: "What do yo want"},
+                {id: 2, message: "What is yor name"},
+                {id: 3, message: "How are you"},
+                {id: 4, message: "My name is..."},
+                {id: 5, message: "Hi"},
+            ],
+            nextMassege: "",
+        },
+        postPagesData: {
+            postsdata: [
+                {id: 1, text: "like", likecount: 123},
+                {id: 2, text: "yo", likecount: 124},
+                {id: 3, text: "dontLike", likecount: 125},
+            ],
+            nextPost: "",
+        },
     },
-    getState () {
+    getState() {
         return this.state
     },
     subscribe(observer: (state: stateType) => void) {
         renderChange = observer
     },
-    dispatch(action){
+    dispatch(action) {
         // Добавление поста в постах
-        if( action.type === "ADD-POST"){
-            let newsPost :postsType  = {
-                id: new Date(). getTime(),
-                text: this.state.nextPost,
+         this.state.postPagesData = PostReduser(this.state.postPagesData, action)
+      /*  if (action.type === "ADD-POST") {
+            let newsPost: postsType = {
+                id: new Date().getTime(),
+                text: this.state.postPagesData.nextPost,
                 likecount: 1
             }
             if (newsPost.text !== "") {
-                this.state.postsdata.push(newsPost)
-                this.state.nextPost = ""
+                this.state.postPagesData.postsdata.push(newsPost)
+                this.state.postPagesData.nextPost = ""
                 renderChange(this.state)
             }
-        }
-        else if (action.type === "CHANGE-TEXT-AREA" ){
-            this.state.nextPost = action.text
+        } else if (action.type === "CHANGE-TEXT-AREA") {
+            this.state.postPagesData.nextPost = action.text
             renderChange(this.state)
-        }
+        }*/
         //сообщение в messegas
-        else if(action.type === "SEND-NEW-MASSEGE"){
-            let newMassage:mesageDataType  = {
-                id: new Date(). getTime(),
-                message: this.state.nextMassege
+
+        this.state.messagesPages = MessageReducer(this.state.messagesPages, action)
+        renderChange(this.state)
+       /* else if (action.type === "SEND-NEW-MASSEGE") {
+            let newMassage: mesageDataType = {
+                id: new Date().getTime(),
+                message: this.state.messagesPages.nextMassege
             }
-            if(newMassage.message !==""){
-                this.state.mesageData.push(newMassage)
-                this.state.nextMassege = ""
+            if (newMassage.message !== "") {
+                this.state.messagesPages.mesageData.push(newMassage)
+                this.state.messagesPages.nextMassege = ""
                 renderChange(this.state)
-            }}
-        else if (action.type === "CHANGE-MASSEGE-TEXT" ){
-        this.state.nextMassege= action.text
+            }
+        } else if (action.type === "CHANGE-MASSEGE-TEXT") {
+            this.state.messagesPages.nextMassege = action.text
             renderChange(this.state)
-        }
+        }*/
 
     },
 }
-
-
-export const  addPostAc = ():addPostType => ({type:"ADD-POST"})
-export const chengePostAc =(text:string):changePostType => ({ type:"CHANGE-TEXT-AREA", text: text})
-
-
-export const addMessegesAc = ():newMassage => ({type:"SEND-NEW-MASSEGE"})
-export const chengeMessgesTextAc =(text:string):ChangeMessageText => ({ type:"CHANGE-MASSEGE-TEXT", text: text})
-
 
 
 

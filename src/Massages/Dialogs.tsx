@@ -1,7 +1,8 @@
 import {NavLink} from 'react-router-dom'
 import cl from './Dialogs.module.css'
-import {ActionsTypes, addMessegesAc, chengeMessgesTextAc, chengePostAc} from "../redux/state";
+import {ActionsTypes} from "../redux/state";
 import React, {ChangeEvent,KeyboardEvent} from "react";
+import {addMessegesAc, chengeMessgesTextAc} from "../redux/messagesReduser";
 
 
 type MessageItemPropsType = {

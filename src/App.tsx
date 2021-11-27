@@ -31,14 +31,14 @@ function App(props: dialogsType) {
                 <div className={"content"}>
                     <Route path='/Dialogs'
                            render={() => <Dialogs
-                               message={props.state.mesageData}
-                               dialog={props.state.dialogsData}
+                               message={props.state.messagesPages.mesageData}
+                               dialog={props.state.dialogPages.dialogsData}
                                dispatch={props.dispatch}
-                               nextMassege={props.state.nextMassege}
+                               nextMassege={props.state.messagesPages.nextMassege}
                            />}/>
-                    <Route path='/Profile' render={() => <Profile posts={props.state.postsdata}
+                    <Route path='/Profile' render={() => <Profile posts={props.state.postPagesData.postsdata}
                                                                   dispatch={props.dispatch}
-                                                                  nextPost={props.state.nextPost}
+                                                                  nextPost={props.state.postPagesData.nextPost}
                         /* addPost={props.addPost}
                          changeTextArea={props.changeTextArea}*/
 
