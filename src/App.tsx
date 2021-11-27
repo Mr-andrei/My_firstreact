@@ -9,7 +9,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
-import {addPostType, changePostType, store} from "./redux/state";
+import {ActionsTypes, addPostType, changePostType, store} from "./redux/state";
 import {stateType} from "./redux/state";
 
 
@@ -17,7 +17,7 @@ type dialogsType = {
     state: stateType
     /*  addPost: () => void
       changeTextArea: (text:string) => void*/
-    dispatch: (action: addPostType | changePostType) => void
+    dispatch: (action: ActionsTypes) => void
 
 }
 
@@ -30,9 +30,15 @@ function App(props: dialogsType) {
                 <NavBar/>
                 <div className={"content"}>
                     <Route path='/Dialogs'
-                           render={() => <Dialogs message={props.state.mesageData} dialog={props.state.dialogsData}/>}/>
+                           render={() => <Dialogs
+                               message={props.state.mesageData}
+                               dialog={props.state.dialogsData}
+                               dispatch={props.dispatch}
+                               nextMassege={props.state.nextMassege}
+                           />}/>
                     <Route path='/Profile' render={() => <Profile posts={props.state.postsdata}
                                                                   dispatch={props.dispatch}
+                                                                  nextPost={props.state.nextPost}
                         /* addPost={props.addPost}
                          changeTextArea={props.changeTextArea}*/
 

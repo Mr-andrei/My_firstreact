@@ -1,13 +1,12 @@
-import {addPostType, changePostType, postsType} from "../../redux/state";
+import {ActionsTypes, addPostAc, addPostType, changePostType, chengePostAc, postsType} from "../../redux/state";
 import React, {ChangeEvent} from "react";
-import {type} from "os";
+import "./profile.css"
 
 
 type postdataPropsType = {
     postdata: Array<postsType>
-    /*addPost: () => void
-    changeTextArea: (text:string) => void*/
-    dispatch: (action: addPostType | changePostType) => void
+    dispatch: (action: ActionsTypes) => void
+    nextPost: string
 }
 
 
@@ -17,11 +16,11 @@ export const Post = (props: postdataPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-       props.dispatch({type:"ADD-POST"} )
-
+        props.dispatch(addPostAc())
     }
-    const changePost = (e:ChangeEvent<HTMLTextAreaElement>) => {
-       props.dispatch({type: "CHANGE-TEXT-AREA", text: e.currentTarget.value})
+    const changePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let postText = e.currentTarget.value
+        props.dispatch(chengePostAc(postText))
     }
 
 
@@ -37,10 +36,11 @@ export const Post = (props: postdataPropsType) => {
 
     return (
         <div>
-            <textarea
-
-               onChange={changePost}
-                ref={newPostElement}></textarea>
+            <textarea className={"textArea"}
+                onChange={changePost}
+                ref={newPostElement}
+                value={props.nextPost}>
+            </textarea>
             <button onClick={addPost}>Add post</button>
 
             {postElement}

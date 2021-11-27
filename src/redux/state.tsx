@@ -8,6 +8,7 @@ type  mesageDataType = {
     id: number
     message: string
 }
+
 export type postsType = {
     id: number
     text: string
@@ -18,8 +19,10 @@ export type  stateType = {
     mesageData: Array<mesageDataType>
     postsdata: Array<postsType>
     nextPost: string
-    newMasage:string
+    nextMassege:string
 }
+
+export type ActionsTypes = addPostType | changePostType | newMassage | ChangeMessageText
 
 type storeType = {
     state: stateType
@@ -27,11 +30,12 @@ type storeType = {
     changeTextArea: (text: string) => void*/
     subscribe: (observer: (state: stateType) => void) => void
     getState : () => stateType
-    dispatch: (action: addPostType | changePostType | newMassage  ) => void
+    dispatch: (action: ActionsTypes  ) => void
 }
 
 export type addPostType ={
     type: "ADD-POST"
+
 }
 export type changePostType ={
     type: "CHANGE-TEXT-AREA"
@@ -40,6 +44,10 @@ export type changePostType ={
 
 export type newMassage = {
     type:"SEND-NEW-MASSEGE"
+}
+export type ChangeMessageText ={
+    type:"CHANGE-MASSEGE-TEXT"
+    text:string
 }
 
 
@@ -59,7 +67,7 @@ export let store: storeType ={
             {id: 4, message: "My name is..."},
             {id: 5, message: "Hi"},
         ],
-        newMasage: "",
+        nextMassege:"",
         postsdata: [
             {id: 1, text: "like", likecount: 123},
             {id: 2, text: "yo", likecount: 124},
@@ -75,9 +83,10 @@ export let store: storeType ={
         renderChange = observer
     },
     dispatch(action){
+        // Добавление поста в постах
         if( action.type === "ADD-POST"){
-            let newsPost = {
-                id: 4,
+            let newsPost :postsType  = {
+                id: new Date(). getTime(),
                 text: this.state.nextPost,
                 likecount: 1
             }
@@ -86,20 +95,43 @@ export let store: storeType ={
                 this.state.nextPost = ""
                 renderChange(this.state)
             }
-            // renderChange(this.state)
         }
         else if (action.type === "CHANGE-TEXT-AREA" ){
             this.state.nextPost = action.text
             renderChange(this.state)
         }
-        // else if (action.type === "SEND-NEW-MASSEGE")(
-        //     this.state.newMasage
-        // )
+        //сообщение в messegas
+        else if(action.type === "SEND-NEW-MASSEGE"){
+            let newMassage:mesageDataType  = {
+                id: new Date(). getTime(),
+                message: this.state.nextMassege
+            }
+            if(newMassage.message !==""){
+                this.state.mesageData.push(newMassage)
+                this.state.nextMassege = ""
+                renderChange(this.state)
+            }}
+        else if (action.type === "CHANGE-MASSEGE-TEXT" ){
+        this.state.nextMassege= action.text
+            renderChange(this.state)
+        }
+
     },
 }
 
 
- // export const addPostActionCreator = () => ({ type:ADD-POST})
+export const  addPostAc = ():addPostType => ({type:"ADD-POST"})
+export const chengePostAc =(text:string):changePostType => ({ type:"CHANGE-TEXT-AREA", text: text})
+
+
+export const addMessegesAc = ():newMassage => ({type:"SEND-NEW-MASSEGE"})
+export const chengeMessgesTextAc =(text:string):ChangeMessageText => ({ type:"CHANGE-MASSEGE-TEXT", text: text})
+
+
+
+
+
+
 
 
 
