@@ -11,6 +11,7 @@ import Music from "./Music/Music";
 import {ActionsTypes, storeType} from "./redux/store";
 import {stateType} from "./redux/store";
 import {ContainerComponentPost} from "./Profile/post/ContainerComponentPost";
+import ContainerDialogs from "./Massages/ContainerDialogs";
 
 
 type dialogsType = {
@@ -28,7 +29,7 @@ function App(props: dialogsType) {
                 <NavBar/>
                 <div className={"content"}>
                     <Route path='/Dialogs'
-                           render={() => <Dialogs
+                           render={() => <ContainerDialogs
                                message={props.state.messagesPages.mesageData}
                                dialog={props.state.dialogPages.dialogsData}
                                dispatch={props.dispatch}

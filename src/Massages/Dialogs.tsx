@@ -17,8 +17,9 @@ type DialogItemPropsType = {
 type statePropsType = {
     dialog: Array<DialogItemPropsType>
     message: Array<MessageItemPropsType>
-    dispatch: (action: ActionsTypes) => void
     nextMassege: string
+    addMessage: ()=> void
+    changeMessege: (text:string)=> void
 }
 
 
@@ -44,7 +45,7 @@ const Dialogs = (props: statePropsType) => {
     let massageElement = props.message.map(m => <MessageItem key={m.id} message={m.message} id={m.id}/>)
 
     const addMessage = () => {
-        props.dispatch(addMessegesAc())}
+       props.addMessage()}
 
     const addMessageOnkeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if(e.key === 'Enter'){
@@ -54,7 +55,7 @@ const Dialogs = (props: statePropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const changeMessege = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value
-        props.dispatch(chengeMessgesTextAc(postText))
+        props.changeMessege(postText)
     }
 
     return (
