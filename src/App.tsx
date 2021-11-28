@@ -8,8 +8,9 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
-import {ActionsTypes} from "./redux/store";
+import {ActionsTypes, storeType} from "./redux/store";
 import {stateType} from "./redux/store";
+import {ContainerComponentPost} from "./Profile/post/ContainerComponentPost";
 
 
 type dialogsType = {
@@ -34,10 +35,8 @@ function App(props: dialogsType) {
                                nextMassege={props.state.messagesPages.nextMassege}
                            />}/>
                     <Route path='/Profile' render={() => <Profile posts={props.state.postPagesData.postsdata}
-                                                                  dispatch={props.dispatch}
-                                                                  nextPost={props.state.postPagesData.nextPost}
-
-                    />}/>
+                                                                                 dispatch={props.dispatch}
+                                                                                 nextPost={props.state.postPagesData.nextPost}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Setting' render={() => <Setting/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
@@ -48,3 +47,10 @@ function App(props: dialogsType) {
 }
 
 export default App;
+
+
+
+/*
+Profile posts={props.state.postPagesData.postsdata}
+dispatch={props.dispatch}
+nextPost={props.state.postPagesData.nextPost}*/

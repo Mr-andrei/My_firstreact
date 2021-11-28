@@ -1,6 +1,8 @@
 import cl from './Profile.module.css'
 import {Post} from "./post/post";
 import {ActionsTypes, postsType} from "../redux/store";
+import {ContainerComponentPost} from "./post/ContainerComponentPost";
+import React from "react";
 
 
 type postsPropsType = {
@@ -26,12 +28,9 @@ const Profile = (props: postsPropsType) => {
                     <li>Educatin:Gstu</li>
                 </ul>
             </div>
-            <Post
-                postdata={props.posts}
-                dispatch={props.dispatch}
-                nextPost={props.nextPost}
-                /* changeTextArea={props.changeTextArea}
-                   addPost={props.addPost}*//>
+            <ContainerComponentPost posts={props.posts}
+                                    dispatch={props.dispatch}
+                                    nextPost={props.nextPost}/>
         </div>
     )
 }

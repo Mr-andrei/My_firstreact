@@ -44,10 +44,8 @@ const Dialogs = (props: statePropsType) => {
     let massageElement = props.message.map(m => <MessageItem key={m.id} message={m.message} id={m.id}/>)
 
     const addMessage = () => {
-        props.dispatch(addMessegesAc()
+        props.dispatch(addMessegesAc())}
 
-        )
-    }
     const addMessageOnkeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if(e.key === 'Enter'){
         addMessage()}
