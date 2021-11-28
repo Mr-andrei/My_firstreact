@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from "./Header/Header";
 import Profile from "./Profile/Profile";
@@ -9,8 +8,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
-import {ActionsTypes, addPostType, changePostType, store} from "./redux/state";
-import {stateType} from "./redux/state";
+import {ActionsTypes} from "./redux/store";
+import {stateType} from "./redux/store";
 
 
 type dialogsType = {

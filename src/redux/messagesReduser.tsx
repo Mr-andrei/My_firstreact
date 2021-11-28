@@ -1,4 +1,4 @@
-import {ActionsTypes, ChangeMessageText, mesageDataType, messagesPagesType, newMassage} from "./state";
+import {ActionsTypes, ChangeMessageText, mesageDataType, messagesPagesType, newMassage} from "./store";
 
 
 

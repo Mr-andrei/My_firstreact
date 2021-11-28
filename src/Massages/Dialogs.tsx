@@ -1,6 +1,6 @@
 import {NavLink} from 'react-router-dom'
 import cl from './Dialogs.module.css'
-import {ActionsTypes} from "../redux/state";
+import {ActionsTypes} from "../redux/store";
 import React, {ChangeEvent,KeyboardEvent} from "react";
 import {addMessegesAc, chengeMessgesTextAc} from "../redux/messagesReduser";
 

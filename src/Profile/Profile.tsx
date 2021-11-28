@@ -1,6 +1,6 @@
 import cl from './Profile.module.css'
 import {Post} from "./post/post";
-import {ActionsTypes, addPostType, changePostType, postsType, stateType} from "../redux/state";
+import {ActionsTypes, postsType} from "../redux/store";
 
 
 type postsPropsType = {

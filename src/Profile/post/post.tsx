@@ -1,4 +1,4 @@
-import {ActionsTypes,  addPostType, changePostType, postsType} from "../../redux/state";
+import {ActionsTypes, postsType} from "../../redux/store";
 import React, {ChangeEvent} from "react";
 import "./profile.css"
 import {addPostAc, chengePostAc} from "../../redux/postReduser";

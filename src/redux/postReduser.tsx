@@ -1,6 +1,6 @@
 
 
-import {ActionsTypes, addPostType, changePostType, postPagesDataType, postsType} from "./state";
+import {ActionsTypes, addPostType, changePostType, postPagesDataType, postsType} from "./store";
 
 
 export const PostReduser = (state:postPagesDataType, action:ActionsTypes) => {
