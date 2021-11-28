@@ -14,8 +14,6 @@ import {stateType} from "./redux/store";
 
 type dialogsType = {
     state: stateType
-    /*  addPost: () => void
-      changeTextArea: (text:string) => void*/
     dispatch: (action: ActionsTypes) => void
 
 }
@@ -38,8 +36,6 @@ function App(props: dialogsType) {
                     <Route path='/Profile' render={() => <Profile posts={props.state.postPagesData.postsdata}
                                                                   dispatch={props.dispatch}
                                                                   nextPost={props.state.postPagesData.nextPost}
-                        /* addPost={props.addPost}
-                         changeTextArea={props.changeTextArea}*/
 
                     />}/>
                     <Route path='/News' render={() => <News/>}/>

@@ -1,20 +1,19 @@
 
 import {PostReduser} from './postReduser';
-import {MessageReducer} from "./messagesReduser";
+import {messageReducer} from "./messagesReduser";
 
 let renderChange = (state: stateType) => {
 }
 
-// dialogs type
-type PagesdialogsDataType = {
+// messaages type
+
+export type PagesdialogsDataType = {
     dialogsData: Array<dialogsDataType>
 }
-type dialogsDataType = {
+export type dialogsDataType = {
     id: number
     name: string
 }
-
-//messages type
 export type messagesPagesType = {
     mesageData: Array<mesageDataType>
     nextMassege: string
@@ -23,6 +22,7 @@ export type  mesageDataType = {
     id: number
     message: string
 }
+
 //Post Type
 export type postPagesDataType = {
     postsdata: Array<postsType>
@@ -39,7 +39,7 @@ export type  stateType = {
     messagesPages: messagesPagesType
     postPagesData: postPagesDataType
 }
-type storeType = {
+export type storeType = {
     state: stateType
     subscribe: (observer: (state: stateType) => void) => void
     getState: () => stateType
@@ -47,8 +47,7 @@ type storeType = {
 }
 
 //Action Type
-export type ActionsTypes = addPostType | changePostType | newMassage | ChangeMessageText
-
+export type ActionsTypes = addPostType | changePostType | newMassage | ChangeMessageText |dialogsData
 export type addPostType = {
     type: "ADD-POST"
 }
@@ -63,6 +62,8 @@ export type ChangeMessageText = {
     type: "CHANGE-MASSEGE-TEXT"
     text: string
 }
+export type dialogsData ={
+    type:"DIALOGS-DATA"}
 
 
 export let store: storeType = {
@@ -104,40 +105,12 @@ export let store: storeType = {
     dispatch(action) {
         // Добавление поста в постах
          this.state.postPagesData = PostReduser(this.state.postPagesData, action)
-      /*  if (action.type === "ADD-POST") {
-            let newsPost: postsType = {
-                id: new Date().getTime(),
-                text: this.state.postPagesData.nextPost,
-                likecount: 1
-            }
-            if (newsPost.text !== "") {
-                this.state.postPagesData.postsdata.push(newsPost)
-                this.state.postPagesData.nextPost = ""
-                renderChange(this.state)
-            }
-        } else if (action.type === "CHANGE-TEXT-AREA") {
-            this.state.postPagesData.nextPost = action.text
-            renderChange(this.state)
-        }*/
+
         //сообщение в messegas
+        this.state.messagesPages = messageReducer(this.state.messagesPages, action)
 
-        this.state.messagesPages = MessageReducer(this.state.messagesPages, action)
+
         renderChange(this.state)
-       /* else if (action.type === "SEND-NEW-MASSEGE") {
-            let newMassage: mesageDataType = {
-                id: new Date().getTime(),
-                message: this.state.messagesPages.nextMassege
-            }
-            if (newMassage.message !== "") {
-                this.state.messagesPages.mesageData.push(newMassage)
-                this.state.messagesPages.nextMassege = ""
-                renderChange(this.state)
-            }
-        } else if (action.type === "CHANGE-MASSEGE-TEXT") {
-            this.state.messagesPages.nextMassege = action.text
-            renderChange(this.state)
-        }*/
-
     },
 }
 

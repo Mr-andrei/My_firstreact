@@ -1,14 +1,19 @@
 import {createStore, combineReducers} from "redux"
 import {PostReduser} from "./postReduser";
-import {MessageReducer} from "./messagesReduser";
-
-const reduser = combineReducers({
-        PostReduser,
-        MessageReducer
-    }
-)
-
-let store = createStore(reduser);
+import {messageReducer} from "./messagesReduser";
+import {dialogReducer} from "./dialogsReducer";
 
 
-export default store
+export type storeTypeRedux = ReturnType<typeof reducer>
+
+const reducer = combineReducers({
+    messagesPages: messageReducer,
+    postPagesData: PostReduser,
+    dialogPages: dialogReducer
+
+})
+
+export let store = createStore(reducer);
+
+
+

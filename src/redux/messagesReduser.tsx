@@ -2,8 +2,23 @@ import {ActionsTypes, ChangeMessageText, mesageDataType, messagesPagesType, newM
 
 
 
-export let MessageReducer = (state:messagesPagesType, action:ActionsTypes) => {
-    if (action.type === "SEND-NEW-MASSEGE") {
+
+const initionalState:messagesPagesType = {
+        mesageData: [
+            {id: 1, message: "What do yo want"},
+            {id: 2, message: "What is yor name"},
+            {id: 3, message: "How are you"},
+            {id: 4, message: "My name is..."},
+            {id: 5, message: "Hi"},
+        ],
+        nextMassege: "",
+    }
+
+export let messageReducer = (state = initionalState, action:ActionsTypes):messagesPagesType => {
+
+
+    switch(action.type){
+        case ( "SEND-NEW-MASSEGE") :
         let newMassage: mesageDataType = {
             id: new Date().getTime(),
             message: state.nextMassege
@@ -11,13 +26,12 @@ export let MessageReducer = (state:messagesPagesType, action:ActionsTypes) => {
         if (state.nextMassege !== "") {
            state.mesageData.push(newMassage)
             state.nextMassege = ""
-        }}
-        else if (action.type === "CHANGE-MASSEGE-TEXT") {
+        }return state
+
+        case ("CHANGE-MASSEGE-TEXT") :
             state.nextMassege = action.text
-           }
-
-
-        return state
+            return state
+        default :return state}
     }
 
 

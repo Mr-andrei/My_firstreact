@@ -2,8 +2,16 @@
 
 import {ActionsTypes, addPostType, changePostType, postPagesDataType, postsType} from "./store";
 
+const initionalState:postPagesDataType = {
+        postsdata: [
+            {id: 1, text: "like", likecount: 123},
+            {id: 2, text: "yo", likecount: 124},
+            {id: 3, text: "dontLike", likecount: 125},
+        ],
+        nextPost: "",
+    }
 
-export const PostReduser = (state:postPagesDataType, action:ActionsTypes) => {
+export const PostReduser = (state=initionalState, action:ActionsTypes):postPagesDataType => {
     switch (action.type) {
         case ("ADD-POST"):
             let newsPost: postsType = {

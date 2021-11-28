@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./redux/store";
+import {store} from "./redux/redux-store";
 import {  stateType, } from './redux/store';
 
 
@@ -15,15 +15,17 @@ export const renderThree = (state: stateType) => {
             <App
                 state={state}
                 dispatch={store.dispatch.bind(store)}
-              /*  addPost={store.addPost.bind(store)}
-                changeTextArea={store.changeTextArea.bind(store)}*/
             />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
-renderThree(store.getState())
-store.subscribe(renderThree)
+renderThree(store.getState())// post message
+store.subscribe(()=>{
+    let state = store.getState()
+    renderThree(state)})
+
+
 
 
 
