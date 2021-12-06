@@ -15,10 +15,10 @@ export type dialogsDataType = {
     name: string
 }
 export type messagesPagesType = {
-    mesageData: Array<mesageDataType>
-    nextMassege: string
+    messageData: Array<messageDataType>
+    nextMessage: string
 }
-export type  mesageDataType = {
+export type  messageDataType = {
     id: number
     message: string
 }
@@ -78,14 +78,14 @@ export let store: storeType = {
             ]
         },
         messagesPages: {
-            mesageData: [
+            messageData: [
                 {id: 1, message: "What do yo want"},
                 {id: 2, message: "What is yor name"},
                 {id: 3, message: "How are you"},
                 {id: 4, message: "My name is..."},
                 {id: 5, message: "Hi"},
             ],
-            nextMassege: "",
+            nextMessage: "",
         },
         postPagesData: {
             postsdata: [
@@ -113,12 +113,6 @@ export let store: storeType = {
         renderChange(this.state)
     },
 }
-
-
-
-
-
-
 
 
 

@@ -2,16 +2,12 @@ import { postsType} from "../../redux/store";
 import React, {ChangeEvent} from "react";
 import "./profile.css"
 
-
-
-
 type PostDataPropsType = {
     posts: Array<postsType>
     addPost:() => void
     changePost:(text:string) => void
     nextPost:string
 }
-
 
 export const Post = (props:PostDataPropsType) => {
 
@@ -27,7 +23,6 @@ export const Post = (props:PostDataPropsType) => {
         props.changePost(postText)
     }
 
-
     const postElement = postData.map(f => {
             return (
                 <div key={f.id}>
@@ -37,7 +32,6 @@ export const Post = (props:PostDataPropsType) => {
             )
         }
     )
-
     return (
         <div>
             <textarea className={"textArea"}

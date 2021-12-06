@@ -9,14 +9,6 @@ import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
 import {MessageContainer} from "./Massages/ContainerDialogs";
 
-
-
-
-
-
-
-
-
 function App() {
     return (
 
@@ -37,19 +29,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-/*
-posts={props.state.postPagesData.postsdata}
-dispatch={props.dispatch}
-nextPost={props.state.postPagesData.nextPost}*/
-
-
-/*message={props.store.messagesPages.mesageData}
-dialog={props.state.dialogPages.dialogsData}
-dispatch={props.dispatch}
-nextMassege={props.state.messagesPages.nextMassege}*/

@@ -13,7 +13,7 @@ const initionalState:postPagesDataType = {
 
 export const PostReduser = (state=initionalState, action:ActionsTypes):postPagesDataType => {
     switch (action.type) {
-        case ("ADD-POST"):
+        case ("ADD-POST"): {
             let newsPost: postsType = {
                 id: new Date().getTime(),
                 text: state.nextPost,
@@ -21,16 +21,19 @@ export const PostReduser = (state=initionalState, action:ActionsTypes):postPages
             }
             if (newsPost.text !== "") {
                 let stateCopy = {...state};
+                stateCopy.postsdata = [...state.postsdata]
                 stateCopy.postsdata.push(newsPost)
-                // state.postsdata.push(newsPost)
-                state.nextPost = ""
+                stateCopy.nextPost = ""
 
-            return stateCopy
+                return stateCopy
             }
             return {...state}
-        case ("CHANGE-TEXT-AREA") :
-            state.nextPost = action.text
-            return {...state}
+        }
+        case ("CHANGE-TEXT-AREA") : {
+            let stateCopy = {...state}
+            stateCopy.nextPost = action.text
+            return stateCopy
+        }
         default: return state
     }
 
