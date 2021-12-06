@@ -10,33 +10,30 @@ const initionalState: postPagesDataType = {
 }
 
 export const PostReduser = (state = initionalState, action: ActionsTypes): postPagesDataType => {
+
     switch (action.type) {
-        case ("ADD-POST"): {
-            let newsPost: postsType = {
+        case "CHANGE-TEXT-AREA": {
+            return {...state, nextPost: action.text}
+        }
+        case "ADD-POST" : {
+            let newPost = {
                 id: new Date().getTime(),
                 text: state.nextPost,
                 likeCount: 1
             }
-            let stateCopy = {...state};
-            stateCopy.postsdata = [...state.postsdata]
-            if (newsPost.text !== "") {
-                stateCopy.postsdata.push(newsPost)
-                stateCopy.nextPost = ""
-
-                return stateCopy
-            }
-            return {...state}
-        }
-        case ("CHANGE-TEXT-AREA") : {
-            let stateCopy = {...state}
-            stateCopy.nextPost = action.text
-            return stateCopy
+            let copyState = newPost.text ? {
+                ...state,
+                postsdata: [...state.postsdata, newPost],
+                nextPost: ""
+            } : state
+            return copyState
         }
         default:
             return state
     }
-
 }
 
 export const addPostAc = (): addPostType => ({type: "ADD-POST"})
 export const chengePostAc = (text: string): changePostType => ({type: "CHANGE-TEXT-AREA", text: text})
+
+

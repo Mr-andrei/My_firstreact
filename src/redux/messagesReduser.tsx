@@ -1,5 +1,6 @@
 import {ActionsTypes, ChangeMessageText, messageDataType, messagesPagesType, newMassage} from "./store";
 
+
 const initionalState: messagesPagesType = {
     messageData: [
         {id: 1, message: "What do yo want"},
@@ -11,30 +12,28 @@ const initionalState: messagesPagesType = {
     nextMessage: "",
 }
 export let messageReducer = (state = initionalState, action: ActionsTypes): messagesPagesType => {
-
-
     switch (action.type) {
+        case "CHANGE-MASSEGE-TEXT" : {
+            return {...state, nextMessage: action.text}
+        }
         case ("SEND-NEW-MASSEGE") : {
-            let newMassage: messageDataType = {
+            let newMessage = {
                 id: new Date().getTime(),
                 message: state.nextMessage
             }
-            let copyState = {...state}
-            copyState.messageData = [...state.messageData]
-            if (state.nextMessage !== "") {
-                copyState.messageData.push(newMassage)
-                copyState.nextMessage = ""
-            }
+            let copyState = newMessage.message ? {
+                ...state,
+                messageData: [...state.messageData,
+                    newMessage],
+                nextMessage: ""
+            } : state
             return copyState
         }
-        case ("CHANGE-MASSEGE-TEXT") :{
-            let copyState = {...state}
-            copyState.nextMessage = action.text
-            return copyState}
-        default :
+        default:
             return state
     }
 }
+
 
 export const addMessegesAc = (): newMassage => ({type: "SEND-NEW-MASSEGE"})
 export const chengeMessgesTextAc = (text: string): ChangeMessageText => ({type: "CHANGE-MASSEGE-TEXT", text: text})
