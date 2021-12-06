@@ -5,33 +5,6 @@ import {Post} from "./post";
 import {connect} from "react-redux";
 
 
-/*
-type postdataPropsType = {
-    posts: Array<postsType>
-    dispatch: (action: ActionsTypes) => void
-    nextPost: string
-}*/
-/*
-export const ContainerComponentPost = (props:postdataPropsType ) => {
-
-    const addPost = () => {
-        props.dispatch(addPostAc())
-    }
-    const changePost = (text:string) =>  {
-        props.dispatch(chengePostAc(text))}
-
-
-
-
-    return (
-        <div>
-           <Post postdata={props.posts}
-                 addPost={addPost}
-                 changePost ={changePost}
-           />
-        </div>
-    )
-}*/
 
 let mapStateToProps = (state:stateType )=>{
     return {

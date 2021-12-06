@@ -2,13 +2,6 @@ import cl from './Profile.module.css'
 import {PostContainer} from "./post/ContainerComponentPost";
 import React from "react";
 
-
-/*type postsPropsType = {
-    posts: Array<postsType>
-    dispatch: (action: ActionsTypes) => void
-    nextPost:string
-}*/
-
 const Profile = () => {
     return (
         <div className={cl.profile}>
