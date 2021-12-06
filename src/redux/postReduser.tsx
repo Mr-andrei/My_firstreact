@@ -1,17 +1,15 @@
-
-
 import {ActionsTypes, addPostType, changePostType, postPagesDataType, postsType} from "./store";
 
-const initionalState:postPagesDataType = {
-        postsdata: [
-            {id: 1, text: "like", likeCount: 123},
-            {id: 2, text: "yo", likeCount: 124},
-            {id: 3, text: "dontLike", likeCount: 125},
-        ],
-        nextPost: "",
-    }
+const initionalState: postPagesDataType = {
+    postsdata: [
+        {id: 1, text: "like", likeCount: 123},
+        {id: 2, text: "yo", likeCount: 124},
+        {id: 3, text: "dontLike", likeCount: 125},
+    ],
+    nextPost: "",
+}
 
-export const PostReduser = (state=initionalState, action:ActionsTypes):postPagesDataType => {
+export const PostReduser = (state = initionalState, action: ActionsTypes): postPagesDataType => {
     switch (action.type) {
         case ("ADD-POST"): {
             let newsPost: postsType = {
@@ -19,9 +17,9 @@ export const PostReduser = (state=initionalState, action:ActionsTypes):postPages
                 text: state.nextPost,
                 likeCount: 1
             }
+            let stateCopy = {...state};
+            stateCopy.postsdata = [...state.postsdata]
             if (newsPost.text !== "") {
-                let stateCopy = {...state};
-                stateCopy.postsdata = [...state.postsdata]
                 stateCopy.postsdata.push(newsPost)
                 stateCopy.nextPost = ""
 
@@ -34,7 +32,8 @@ export const PostReduser = (state=initionalState, action:ActionsTypes):postPages
             stateCopy.nextPost = action.text
             return stateCopy
         }
-        default: return state
+        default:
+            return state
     }
 
 }

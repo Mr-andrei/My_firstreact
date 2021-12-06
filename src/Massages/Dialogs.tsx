@@ -1,6 +1,6 @@
 import {NavLink} from 'react-router-dom'
 import cl from './Dialogs.module.css'
-import {ActionsTypes, dialogsDataType, mesageDataType} from "../redux/store";
+import { dialogsDataType, messageDataType} from "../redux/store";
 import React, {ChangeEvent,KeyboardEvent} from "react";
 
 
@@ -16,7 +16,7 @@ type DialogItemPropsType = {
 }
 type statePropsType = {
     dialog: Array<dialogsDataType>
-    message: Array<mesageDataType>
+    message: Array<messageDataType>
     nextMessage: string
     addMessage: ()=> void
     changeMassage: (text:string)=> void
