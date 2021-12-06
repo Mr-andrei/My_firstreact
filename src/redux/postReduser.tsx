@@ -1,4 +1,4 @@
-import {ActionsTypes, addPostType, changePostType, postPagesDataType, postsType} from "./store";
+import {ActionsTypes, addPostType, changePostType, postPagesDataType} from "./store";
 
 const initionalState: postPagesDataType = {
     postsdata: [

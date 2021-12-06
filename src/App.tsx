@@ -8,6 +8,8 @@ import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
 import {MessageContainer} from "./Massages/ContainerDialogs";
+import {UsersContainer} from "./users/UsersContainer";
+
 
 function App() {
     return (
@@ -22,6 +24,7 @@ function App() {
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Setting' render={() => <Setting/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
+                    <Route path='/Users' render={() => <UsersContainer/>}/>
                 </div>
             </div>
 

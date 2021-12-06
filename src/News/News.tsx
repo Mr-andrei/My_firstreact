@@ -1,10 +1,10 @@
 
 
 
-const News = () =>{
-    return(
+const News = () => {
+    return (
         <div>
-            News
+            dfdffdv
         </div>
     )
 }
