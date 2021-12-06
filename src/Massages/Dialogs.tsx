@@ -1,8 +1,8 @@
 import {NavLink} from 'react-router-dom'
 import cl from './Dialogs.module.css'
-import {ActionsTypes} from "../redux/store";
+import {ActionsTypes, dialogsDataType, mesageDataType} from "../redux/store";
 import React, {ChangeEvent,KeyboardEvent} from "react";
-import {addMessegesAc, chengeMessgesTextAc} from "../redux/messagesReduser";
+
 
 
 type MessageItemPropsType = {
@@ -15,11 +15,11 @@ type DialogItemPropsType = {
     name: string
 }
 type statePropsType = {
-    dialog: Array<DialogItemPropsType>
-    message: Array<MessageItemPropsType>
-    nextMassege: string
+    dialog: Array<dialogsDataType>
+    message: Array<mesageDataType>
+    nextMessage: string
     addMessage: ()=> void
-    changeMessege: (text:string)=> void
+    changeMassage: (text:string)=> void
 }
 
 
@@ -55,7 +55,7 @@ const Dialogs = (props: statePropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const changeMessege = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value
-        props.changeMessege(postText)
+        props.changeMassage(postText)
     }
 
     return (
@@ -70,7 +70,7 @@ const Dialogs = (props: statePropsType) => {
             <textarea
                 ref={newPostElement}
                 onChange={changeMessege}
-                value={props.nextMassege}
+                value={props.nextMessage}
                 onKeyPress={addMessageOnkeyPress}
             ></textarea>
             <button

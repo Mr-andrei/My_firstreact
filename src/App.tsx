@@ -8,42 +8,32 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
-import {ActionsTypes, storeType} from "./redux/store";
-import {stateType} from "./redux/store";
-import {ContainerComponentPost} from "./Profile/post/ContainerComponentPost";
-import ContainerDialogs from "./Massages/ContainerDialogs";
+import {MessageContainer} from "./Massages/ContainerDialogs";
 
 
-type dialogsType = {
-    state: stateType
-    dispatch: (action: ActionsTypes) => void
-
-}
 
 
-function App(props: dialogsType) {
+
+
+
+
+
+function App() {
     return (
-        <BrowserRouter>
+
             <div className="grid_container">
                 <Header/>
                 <NavBar/>
                 <div className={"content"}>
                     <Route path='/Dialogs'
-                           render={() => <ContainerDialogs
-                               message={props.state.messagesPages.mesageData}
-                               dialog={props.state.dialogPages.dialogsData}
-                               dispatch={props.dispatch}
-                               nextMassege={props.state.messagesPages.nextMassege}
-                           />}/>
-                    <Route path='/Profile' render={() => <Profile posts={props.state.postPagesData.postsdata}
-                                                                                 dispatch={props.dispatch}
-                                                                                 nextPost={props.state.postPagesData.nextPost}/>}/>
+                           render={() => <MessageContainer/>}/>
+                    <Route path='/Profile' render={() => <Profile/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Setting' render={() => <Setting/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 
@@ -51,7 +41,16 @@ export default App;
 
 
 
+
+
+
 /*
-Profile posts={props.state.postPagesData.postsdata}
+posts={props.state.postPagesData.postsdata}
 dispatch={props.dispatch}
 nextPost={props.state.postPagesData.nextPost}*/
+
+
+/*message={props.store.messagesPages.mesageData}
+dialog={props.state.dialogPages.dialogsData}
+dispatch={props.dispatch}
+nextMassege={props.state.messagesPages.nextMassege}*/

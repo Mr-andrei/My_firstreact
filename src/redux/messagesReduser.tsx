@@ -30,8 +30,9 @@ export let messageReducer = (state = initionalState, action:ActionsTypes):messag
 
         case ("CHANGE-MASSEGE-TEXT") :
             state.nextMassege = action.text
-            return state
-        default :return state}
+            return {...state}
+        default : return state
+    }
     }
 
 

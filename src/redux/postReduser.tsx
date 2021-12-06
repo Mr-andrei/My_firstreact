@@ -4,9 +4,9 @@ import {ActionsTypes, addPostType, changePostType, postPagesDataType, postsType}
 
 const initionalState:postPagesDataType = {
         postsdata: [
-            {id: 1, text: "like", likecount: 123},
-            {id: 2, text: "yo", likecount: 124},
-            {id: 3, text: "dontLike", likecount: 125},
+            {id: 1, text: "like", likeCount: 123},
+            {id: 2, text: "yo", likeCount: 124},
+            {id: 3, text: "dontLike", likeCount: 125},
         ],
         nextPost: "",
     }
@@ -17,17 +17,20 @@ export const PostReduser = (state=initionalState, action:ActionsTypes):postPages
             let newsPost: postsType = {
                 id: new Date().getTime(),
                 text: state.nextPost,
-                likecount: 1
+                likeCount: 1
             }
             if (newsPost.text !== "") {
-                state.postsdata.push(newsPost)
+                let stateCopy = {...state};
+                stateCopy.postsdata.push(newsPost)
+                // state.postsdata.push(newsPost)
                 state.nextPost = ""
 
+            return stateCopy
             }
-            return state
+            return {...state}
         case ("CHANGE-TEXT-AREA") :
             state.nextPost = action.text
-            return state
+            return {...state}
         default: return state
     }
 

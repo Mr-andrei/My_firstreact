@@ -31,7 +31,7 @@ export type postPagesDataType = {
 export type postsType = {
     id: number
     text: string
-    likecount: number
+    likeCount: number
 }
 //State Type
 export type  stateType = {
@@ -89,9 +89,9 @@ export let store: storeType = {
         },
         postPagesData: {
             postsdata: [
-                {id: 1, text: "like", likecount: 123},
-                {id: 2, text: "yo", likecount: 124},
-                {id: 3, text: "dontLike", likecount: 125},
+                {id: 1, text: "like", likeCount: 123},
+                {id: 2, text: "yo", likeCount: 124},
+                {id: 3, text: "dontLike", likeCount: 125},
             ],
             nextPost: "",
         },

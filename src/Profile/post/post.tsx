@@ -4,21 +4,23 @@ import "./profile.css"
 
 
 
-type postdataPropsType = {
-    postdata: Array<postsType>
+
+type PostDataPropsType = {
+    posts: Array<postsType>
     addPost:() => void
     changePost:(text:string) => void
     nextPost:string
 }
 
 
-export const Post = (props: postdataPropsType) => {
+export const Post = (props:PostDataPropsType) => {
 
-    let postData = props.postdata
+    let postData = props.posts
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
         props.addPost()
+        console.log("123")
     }
     const changePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value
@@ -28,9 +30,9 @@ export const Post = (props: postdataPropsType) => {
 
     const postElement = postData.map(f => {
             return (
-                <div>
+                <div key={f.id}>
                     <span>{f.text}</span>
-                    <span>{f.likecount}</span>
+                    <span>{f.likeCount}</span>
                 </div>
             )
         }

@@ -3,27 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./redux/redux-store";
+// import {store} from "./redux/redux-store";
 import {  stateType, } from './redux/store';
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import {store} from "./redux/redux-store";
 
 
 
 
-export const renderThree = (state: stateType) => {
+// export const renderThree = (state: stateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App
-                state={state}
-                dispatch={store.dispatch.bind(store)}
-            />
+            <BrowserRouter>
+                <Provider store={store}>
+            <App/>
+                </Provider>
+        </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
-renderThree(store.getState())// post message
-store.subscribe(()=>{
-    let state = store.getState()
-    renderThree(state)})
+// }
+// renderThree(store.getState())// post message
+// store.subscribe(()=>{
+//     let state = store.getState()
+//     renderThree(state)})
 
 
 

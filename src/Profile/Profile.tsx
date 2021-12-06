@@ -1,17 +1,15 @@
 import cl from './Profile.module.css'
-import {Post} from "./post/post";
-import {ActionsTypes, postsType} from "../redux/store";
-import {ContainerComponentPost} from "./post/ContainerComponentPost";
+import {PostContainer} from "./post/ContainerComponentPost";
 import React from "react";
 
 
-type postsPropsType = {
+/*type postsPropsType = {
     posts: Array<postsType>
     dispatch: (action: ActionsTypes) => void
     nextPost:string
-}
+}*/
 
-const Profile = (props: postsPropsType) => {
+const Profile = () => {
     return (
         <div className={cl.profile}>
             <img className={cl.profile_img}
@@ -28,9 +26,7 @@ const Profile = (props: postsPropsType) => {
                     <li>Educatin:Gstu</li>
                 </ul>
             </div>
-            <ContainerComponentPost posts={props.posts}
-                                    dispatch={props.dispatch}
-                                    nextPost={props.nextPost}/>
+            <PostContainer/>
         </div>
     )
 }
