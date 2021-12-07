@@ -39,7 +39,7 @@ const initialState: InitialStateType = {
 }
 
 
-export let usersReducer = (state = initialState, action: FollowACType | unFollowACType): InitialStateType => {
+export let usersReducer = (state: InitialStateType = initialState, action: FollowACType | unFollowACType): InitialStateType => {
     switch (action.type) {
         case 'FOLLOW': {
             let copyState = {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: true} : m)}

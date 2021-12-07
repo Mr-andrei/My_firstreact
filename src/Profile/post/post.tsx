@@ -16,7 +16,6 @@ export const Post = (props:PostDataPropsType) => {
 
     const addPost = () => {
         props.addPost()
-        console.log("123")
     }
     const changePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value

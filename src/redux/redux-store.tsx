@@ -5,7 +5,7 @@ import {dialogReducer} from "./dialogsReducer";
 import {usersReducer} from "./usersReducer";
 
 
-export type storeTypeRedux = ReturnType<typeof reducer>
+export type RootStateType = ReturnType<typeof reducer>
 
 const reducer = combineReducers({
     messagesPages: messageReducer,

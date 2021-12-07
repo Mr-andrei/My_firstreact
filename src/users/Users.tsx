@@ -1,20 +1,29 @@
-import { PersonType} from "../redux/usersReducer";
 import React from "react";
+import {UsersContainerType} from "./UsersContainer";
+
+
+const Users = (props: UsersContainerType) => {
 
 
 
-type UsersPropsType  = {
-    users:Array<PersonType>
-    follow: (id:number) => void
-    unFollow: (id:number) => void
+    let dataUsers = props.users.map(m => {
+        let btn = m.follow ? <button onClick={()=> props.unFollow(m.id)}>Unfollow</button>:  <button onClick={()=> props.follow(m.id)}>Follow</button>
+        return(
+            <div key={m.id}>
+                <h5>{m.firstName}</h5>
+                <span>{m.status}</span>
+                <div>{btn}  </div>
+                <div>
+                    <span>{m.place.country}</span>
+                    <span>{m.place.city}</span>
+                </div>
+            </div>
+        ) })
 
-}
-
-
-
-const Users = ({users, follow, unFollow}:UsersPropsType) => {
     return (
-        users && users.map( m => <div key={m.id}>{m.firstName}</div>)
+        <div>
+            {dataUsers}
+        </div>
     )
 }
 
