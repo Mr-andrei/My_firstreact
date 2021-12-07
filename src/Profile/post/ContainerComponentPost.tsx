@@ -1,12 +1,18 @@
-import {ActionsTypes,  stateType, } from "../../redux/store";
+import {ActionsTypes, postsType, stateType,} from "../../redux/store";
 import "./profile.css"
 import {addPostAc, chengePostAc} from "../../redux/postReduser";
 import {Post} from "./post";
 import {connect} from "react-redux";
+import {RootStateType} from "../../redux/redux-store";
 
 
 
-let mapStateToProps = (state:stateType )=>{
+type MSType ={
+    posts:Array<postsType>
+    nextPost:string
+}
+
+let mapStateToProps = (state:RootStateType ):MSType=>{
     return {
         posts: state.postPagesData.postsdata,
         nextPost: state.postPagesData.nextPost
