@@ -15,8 +15,8 @@ type propsType = {
 
 class Users extends React.Component<propsType> {
 
-    constructor(props:propsType) {
-        super(props);
+
+    componentDidMount() {
         if(this.props.users.length === 0  ){
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then( response => {
                 this.props.setState(response.data.items)
@@ -25,7 +25,7 @@ class Users extends React.Component<propsType> {
     }
 
 
- render(){
+    render(){
      return(
          <div>
              {
