@@ -5,41 +5,21 @@ type PlaceType = {
 export type PersonType = {
     id: number
     follow: boolean
-    firstName: string
+    name: string
     status: string
     place: PlaceType
+    photos: string
 }
 export type InitialStateType = {
     users: Array<PersonType>
 }
 const initialState: InitialStateType = {
-    users: [
-        {
-            id: 1,
-            follow: true,
-            firstName: "Andrei",
-            status: "I am looking for job right now",
-            place: {country: "belarus", city: 'Minsk'}
-        },
-        {
-            id: 2,
-            follow: false,
-            firstName: "Andrei",
-            status: "I am looking for job right now",
-            place: {country: "belarus", city: 'Minsk'}
-        },
-        {
-            id: 3,
-            follow: true,
-            firstName: "Andrei",
-            status: "I am looking for job right now",
-            place: {country: "belarus", city: 'Minsk'}
-        },
-    ]
+    users : []
 }
 
+type  AllActionType = SetUserACType | FollowACType | unFollowACType
 
-export let usersReducer = (state: InitialStateType = initialState, action: FollowACType | unFollowACType): InitialStateType => {
+export let usersReducer = (state = initialState , action: AllActionType): InitialStateType => {
     switch (action.type) {
         case 'FOLLOW': {
             let copyState = {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: true} : m)}
@@ -47,6 +27,11 @@ export let usersReducer = (state: InitialStateType = initialState, action: Follo
         }
         case 'UN-FOLLOW' : {
             let copyState = {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: false} : m)}
+            return copyState
+
+        }
+        case 'SET-USERS' : {
+            let copyState = {...state, users:[ ...action.state] }
             return copyState
 
         }
@@ -70,5 +55,13 @@ export const unFollowAC = (id: number) => {
     return {
         type: 'UN-FOLLOW',
         id
+    } as const
+}
+
+export type SetUserACType = ReturnType<typeof setUserUAC>
+export const setUserUAC = (state:Array<PersonType>) => {
+    return {
+        type: 'SET-USERS',
+       state
     } as const
 }
