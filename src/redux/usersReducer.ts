@@ -12,12 +12,18 @@ export type PersonType = {
 }
 export type InitialStateType = {
     users: Array<PersonType>
+    pageSize: number
+    totalCount:number
+    currentPage:number
 }
 const initialState: InitialStateType = {
-    users : []
+    users : [],
+    pageSize: 5,
+    totalCount: 40,
+    currentPage: 1
 }
 
-type  AllActionType = SetUserACType | FollowACType | unFollowACType
+type  AllActionType = SetUserACType | FollowACType | unFollowACType | currentPagePlusType | SetTotalUserCountType
 
 export let usersReducer = (state = initialState , action: AllActionType): InitialStateType => {
     switch (action.type) {
@@ -31,9 +37,15 @@ export let usersReducer = (state = initialState , action: AllActionType): Initia
 
         }
         case 'SET-USERS' : {
-            let copyState = {...state, users:[ ...action.state] }
+            let copyState = {...state, users:action.state }
             return copyState
 
+        }
+        case "CURRENT-PAGE-PLUS" : {
+            return {...state, currentPage:action.current}
+        }
+        case "SET-USERS-COUNT" : {
+            return {...state, totalCount:action.count/1000}
         }
 
         default:
@@ -63,5 +75,21 @@ export const setUserUAC = (state:Array<PersonType>) => {
     return {
         type: 'SET-USERS',
        state
+    } as const
+}
+
+export type currentPagePlusType = ReturnType<typeof currentPagePlusAC >
+export const currentPagePlusAC = (current:number) => {
+    return {
+        type: "CURRENT-PAGE-PLUS",
+        current
+    } as const
+}
+
+export type SetTotalUserCountType = ReturnType<typeof SetTotalUserCountAC>
+export const SetTotalUserCountAC = (count:number) => {
+    return {
+        type: "SET-USERS-COUNT",
+        count
     } as const
 }
