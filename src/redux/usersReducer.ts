@@ -2,13 +2,16 @@ type PlaceType = {
     country: string
     city: string
 }
+type fotoType = {
+    small:string
+}
 export type PersonType = {
     id: number
     follow: boolean
     name: string
     status: string
     place: PlaceType
-    photos: string
+    photos: fotoType
 }
 export type InitialStateType = {
     users: Array<PersonType>
@@ -45,7 +48,7 @@ export let usersReducer = (state = initialState , action: AllActionType): Initia
             return {...state, currentPage:action.current}
         }
         case "SET-USERS-COUNT" : {
-            return {...state, totalCount:action.count/1000}
+            return {...state, totalCount:action.count/100}
         }
 
         default:

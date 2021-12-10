@@ -56,7 +56,7 @@ class Users extends React.Component<propsType> {
                 {
 
                     this.props.users.map(m => <div>
-                        <img src={m.photos &&images} alt=""/>
+                        <img src={m.photos.small !== null ? m.photos.small : images } alt=""/>
                         <h5>{m.name}</h5>
                         <span>{m.status}</span>
                         <div>{m.follow ? <button onClick={() => this.props.unFollow(m.id)}>Unfollow</button> :
