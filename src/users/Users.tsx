@@ -1,8 +1,11 @@
+
+
 import React from "react";
 import {UsersContainerType} from "./UsersContainer";
 import axios from "axios";
 import images from "./images/images.jpg"
 
+/*
 
 const Users = (props: UsersContainerType) => {
 
@@ -37,4 +40,4 @@ const Users = (props: UsersContainerType) => {
     )
 }
 
-export default Users
+export default Users*/

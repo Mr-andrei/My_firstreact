@@ -1,15 +1,15 @@
-import {followAC, InitialStateType, PersonType, setUserUAC, unFollowAC} from "../redux/usersReducer";
+import {followAC, PersonType, setUserUAC, unFollowAC} from "../redux/usersReducer";
 import {connect} from "react-redux";
-import Users from "./Users";
 import {RootStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
+import Users from "./UsersС";
 
 
 type MSTPType = {
     users: Array<PersonType>
 }
 
-type MDTPType = {
+export type MDTPType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
     setState:(state:Array<PersonType>) => void
