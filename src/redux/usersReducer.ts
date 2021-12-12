@@ -48,7 +48,7 @@ export let usersReducer = (state = initialState , action: AllActionType): Initia
             return {...state, currentPage:action.current}
         }
         case "SET-USERS-COUNT" : {
-            return {...state, totalCount:action.count/100}
+            return {...state, totalCount:action.count/1000}
         }
 
         default:

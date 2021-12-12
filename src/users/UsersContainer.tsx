@@ -9,7 +9,7 @@ import {
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
-import Users from "./UsersС";
+import UsersC from "./UsersС";
 
 
 type MSTPType = {
@@ -60,4 +60,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersC)
