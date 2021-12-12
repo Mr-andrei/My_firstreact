@@ -2,6 +2,7 @@ import React from "react";
 import images from "./images/images.jpg"
 import s from "./users.module.css";
 import {PersonType} from "../redux/usersReducer";
+import {Loader} from "../componets/loader/Loader";
 
 
 type propsType = {
@@ -12,6 +13,7 @@ type propsType = {
     totalCount: number
     currentPage: number
     onsetPages: (current: number) => void
+
 }
 
 
@@ -61,6 +63,7 @@ const Users = ({
 
                 </div>)
             }
+
         </div>
 
     )
