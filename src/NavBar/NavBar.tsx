@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import cl from './NavBar.module.css'
+import {Loader} from "../componets/loader/Loader";
 const NavBar = () =>{
     return (
         <div className={cl.nav_bar} >

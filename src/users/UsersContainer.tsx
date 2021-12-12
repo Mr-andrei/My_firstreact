@@ -1,7 +1,7 @@
 import {
     currentPagePlusAC,
     followAC,
-    PersonType,
+    PersonType, preloadertAC,
     SetTotalUserCountAC,
     setUserUAC,
     unFollowAC
@@ -13,6 +13,7 @@ import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
+import {Loader} from "../componets/loader/Loader";
 
 type UsersPropsType = {
     follow: (id: number) => void
@@ -24,26 +25,33 @@ type UsersPropsType = {
     currentPage: number
     currentPagePlus: (current: number) => void
     SetTotalUserCount: (count: number) => void
+    setLoader : (loading: boolean) => void
+    preloader: boolean
 }
 class UsersC extends React.Component<UsersPropsType> {
 
 
     componentDidMount() {
+        this.props.setLoader(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setLoader(false)
             this.props.setState(response.data.items)
             this.props.SetTotalUserCount(response.data.totalCount)
         })
     }
 
     onsetPages = (current: number) => {
+        this.props.setLoader(true)
         this.props.currentPagePlus(current)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${current}&count=${this.props.pageSize}`).then(response => {
+            this.props.setLoader(false)
             this.props.setState(response.data.items)
         })
     }
 
     render() {
-        return   <Users
+        return   (
+        <Users
             follow={this.props.follow}
             unFollow={this.props.unFollow}
             users={this.props.users}
@@ -51,8 +59,10 @@ class UsersC extends React.Component<UsersPropsType> {
             totalCount={this.props.totalCount}
             currentPage={this.props.currentPage}
             onsetPages={this.onsetPages}
-        />
+            preloader={this.props.preloader}
 
+        />
+        )
     }
 
 }
@@ -63,6 +73,7 @@ type MSTPType = {
     pageSize: number
     totalCount:number
     currentPage: number
+    preloader:boolean
 }
 export type MDTPType = {
     follow: (id: number) => void
@@ -70,6 +81,7 @@ export type MDTPType = {
     setState:(state:Array<PersonType>) => void
     currentPagePlus : (current:number)=> void
     SetTotalUserCount : (count:number) => void
+    setLoader : (loading: boolean) => void
 
 }
 
@@ -80,7 +92,8 @@ const mapStateToProps = (state: RootStateType):MSTPType => {
         users: state.usersPages.users,
         pageSize: state.usersPages.pageSize,
         totalCount: state.usersPages.totalCount,
-        currentPage: state.usersPages.currentPage
+        currentPage: state.usersPages.currentPage,
+        preloader: state.usersPages.preloader
     }
 }
 
@@ -100,7 +113,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
         },
         SetTotalUserCount: (count :number) => {
             dispatch(SetTotalUserCountAC(count))
-        }
+        },
+        setLoader(loading: boolean){
+        dispatch(preloadertAC (loading))}
 
     }
 }

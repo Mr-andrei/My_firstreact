@@ -3,7 +3,7 @@ type PlaceType = {
     city: string
 }
 type fotoType = {
-    small:string
+    small: string
 }
 export type PersonType = {
     id: number
@@ -16,19 +16,23 @@ export type PersonType = {
 export type InitialStateType = {
     users: Array<PersonType>
     pageSize: number
-    totalCount:number
-    currentPage:number
+    totalCount: number
+    currentPage: number
+    preloader: boolean
 }
 const initialState: InitialStateType = {
-    users : [],
+    users: [],
     pageSize: 5,
-    totalCount: 40,
-    currentPage: 1
+    totalCount: 0,
+    currentPage: 1,
+    preloader: false
 }
 
-type  AllActionType = SetUserACType | FollowACType | unFollowACType | currentPagePlusType | SetTotalUserCountType
+type  AllActionType = SetUserACType | FollowACType
+    | unFollowACType | currentPagePlusType
+    | SetTotalUserCountType | PreloaderType
 
-export let usersReducer = (state = initialState , action: AllActionType): InitialStateType => {
+export let usersReducer = (state = initialState, action: AllActionType): InitialStateType => {
     switch (action.type) {
         case 'FOLLOW': {
             let copyState = {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: true} : m)}
@@ -40,15 +44,18 @@ export let usersReducer = (state = initialState , action: AllActionType): Initia
 
         }
         case 'SET-USERS' : {
-            let copyState = {...state, users:action.state }
+            let copyState = {...state, users: action.state}
             return copyState
 
         }
         case "CURRENT-PAGE-PLUS" : {
-            return {...state, currentPage:action.current}
+            return {...state, currentPage: action.current}
         }
         case "SET-USERS-COUNT" : {
-            return {...state, totalCount:action.count/1000}
+            return {...state, totalCount: action.count / 1000}
+        }
+        case "LOADER" : {
+            return {...state, preloader:action.loading}
         }
 
         default:
@@ -74,15 +81,15 @@ export const unFollowAC = (id: number) => {
 }
 
 export type SetUserACType = ReturnType<typeof setUserUAC>
-export const setUserUAC = (state:Array<PersonType>) => {
+export const setUserUAC = (state: Array<PersonType>) => {
     return {
         type: 'SET-USERS',
-       state
+        state
     } as const
 }
 
-export type currentPagePlusType = ReturnType<typeof currentPagePlusAC >
-export const currentPagePlusAC = (current:number) => {
+export type currentPagePlusType = ReturnType<typeof currentPagePlusAC>
+export const currentPagePlusAC = (current: number) => {
     return {
         type: "CURRENT-PAGE-PLUS",
         current
@@ -90,9 +97,17 @@ export const currentPagePlusAC = (current:number) => {
 }
 
 export type SetTotalUserCountType = ReturnType<typeof SetTotalUserCountAC>
-export const SetTotalUserCountAC = (count:number) => {
+export const SetTotalUserCountAC = (count: number) => {
     return {
         type: "SET-USERS-COUNT",
         count
+    } as const
+}
+
+export type PreloaderType = ReturnType<typeof preloadertAC>
+export const preloadertAC = (loading: boolean) => {
+    return {
+        type: "LOADER",
+        loading
     } as const
 }

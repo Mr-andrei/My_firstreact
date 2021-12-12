@@ -2,6 +2,7 @@ import React from "react";
 import images from "./images/images.jpg"
 import s from "./users.module.css";
 import {PersonType} from "../redux/usersReducer";
+import {Loader} from "../componets/loader/Loader";
 
 
 type propsType = {
@@ -12,11 +13,14 @@ type propsType = {
     totalCount: number
     currentPage: number
     onsetPages: (current: number) => void
+    preloader: boolean
+
 }
 
 
 const Users = ({
                    follow,
+                   preloader,
                    unFollow,
                    users,
                    pageSize,
@@ -31,36 +35,30 @@ const Users = ({
     for (let i = 1; i <= pagesCount; i++) {
         page.push(i)
     }
+    let mainUsers = users.map(m => <div>
+        <img src={m.photos.small !== null ? m.photos.small : images} alt=""/>
+        <h5>{m.name}</h5>
+        <span>{m.status}</span>
+        <div>{m.follow ? <button onClick={() => unFollow(m.id)}>Unfollow</button> :
+            <button onClick={() => follow(m.id)}>Follow</button>}  </div>
+        <div>
+            <span>{"m.place.country"}</span>
+            <span>{"m.place.city"}</span>
+        </div>
+    </div>)
+    let pages = page.map(m => {
+        return <span onClick={(e) => {onsetPages(m)}}
+                     className={currentPage === m ? s.count_list : s.normal_numb}>
+                         {m}
+                     </span>})
 
+    let loaderUsers = preloader ? <Loader/> : mainUsers
 
     return (
+
         <div>
-            <div>
-                {page.map(m => {
-                    return <span onClick={(e) => {
-                        onsetPages(m)
-                    }}
-                                 className={currentPage === m ? s.count_list : ""}>
-                         {m}
-                     </span>
-                })}
-
-            </div>
-            {
-
-                users.map(m => <div>
-                    <img src={m.photos.small !== null ? m.photos.small : images} alt=""/>
-                    <h5>{m.name}</h5>
-                    <span>{m.status}</span>
-                    <div>{m.follow ? <button onClick={() => unFollow(m.id)}>Unfollow</button> :
-                        <button onClick={() => follow(m.id)}>Follow</button>}  </div>
-                    <div>
-                        <span>{"m.place.country"}</span>
-                        <span>{"m.place.city"}</span>
-                    </div>
-
-                </div>)
-            }
+            <div>{pages}</div>
+            {loaderUsers}
         </div>
 
     )

@@ -1,8 +1,13 @@
 
 
 
-
+.normal_numb{
+    cursor: pointer;
+    margin-right: 4px;
+}
 
 .count_list{
     font-weight: bold;
+    cursor: pointer;
+    margin-right: 4px;
 }
