@@ -1,11 +1,10 @@
 import React from "react";
-import images from "./images/images.jpg"
-import {PersonType, SetTotalUserCountAC} from "../redux/usersReducer";
+import {PersonType} from "../redux/usersReducer";
 import axios from "axios";
-import s from './users.module.css'
 import Users from "./Users";
 
-type propsType = {
+/*
+type UsersPropsType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
     setState: (state: Array<PersonType>) => void
@@ -18,7 +17,7 @@ type propsType = {
 }
 
 
-class UsersC extends React.Component<propsType> {
+class UsersC extends React.Component<UsersPropsType> {
 
 
     componentDidMount() {
@@ -49,5 +48,6 @@ class UsersC extends React.Component<propsType> {
     }
 
 }
+*/
 
-export default UsersC
+/*export default UsersC*/

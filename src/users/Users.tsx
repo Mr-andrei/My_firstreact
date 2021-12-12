@@ -1,6 +1,4 @@
 import React from "react";
-import {UsersContainerType} from "./UsersContainer";
-import axios from "axios";
 import images from "./images/images.jpg"
 import s from "./users.module.css";
 import {PersonType} from "../redux/usersReducer";
