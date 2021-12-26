@@ -97,6 +97,7 @@ const mapStateToProps = (state: RootStateType):MSTPType => {
     }
 }
 
+
 const mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
     return {
         follow: (id: number) => {
