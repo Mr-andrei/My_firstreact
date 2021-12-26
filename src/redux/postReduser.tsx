@@ -1,4 +1,4 @@
-import {ActionsTypes, addPostType, changePostType, postPagesDataType} from "./store";
+import { postPagesDataType} from "./store";
 
 const initionalState: postPagesDataType = {
     postsdata: [
@@ -8,8 +8,22 @@ const initionalState: postPagesDataType = {
     ],
     nextPost: "",
 }
+type ActionsALLTypes = addPostType | changePostType | ProfileTypeAC
 
-export const PostReduser = (state = initionalState, action: ActionsTypes): postPagesDataType => {
+export type addPostType = {
+    type: "ADD-POST"
+}
+export type changePostType = {
+    type: "CHANGE-TEXT-AREA"
+    text: string
+}
+
+type ProfileTypeAC = {
+    type: "SET-USERS-PROFILE"
+    profile: string
+}
+
+export const PostReduser = (state = initionalState, action: ActionsALLTypes): postPagesDataType => {
 
     switch (action.type) {
         case "CHANGE-TEXT-AREA": {
@@ -34,6 +48,11 @@ export const PostReduser = (state = initionalState, action: ActionsTypes): postP
 }
 
 export const addPostAc = (): addPostType => ({type: "ADD-POST"})
+export const setProfileAc = (profile:string)=> {
+    return {
+        type: "ADD-POST", profile
+    }
+}
 export const chengePostAc = (text: string): changePostType => ({type: "CHANGE-TEXT-AREA", text: text})
 
 
