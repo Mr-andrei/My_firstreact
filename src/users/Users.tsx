@@ -3,6 +3,7 @@ import images from "./images/images.jpg"
 import s from "./users.module.css";
 import {PersonType} from "../redux/usersReducer";
 import {Loader} from "../componets/loader/Loader";
+import { NavLink } from 'react-router-dom'
 
 
 type propsType = {
@@ -36,7 +37,9 @@ const Users = ({
         page.push(i)
     }
     let mainUsers = users.map(m => <div>
-        <img src={m.photos.small !== null ? m.photos.small : images} alt=""/>
+        <NavLink to={"./profile/" + m.id}>
+        <img src={m.photos.small != null  ? m.photos.small : images} alt=""/>
+        </NavLink>
         <h5>{m.name}</h5>
         <span>{m.status}</span>
         <div>{m.follow ? <button onClick={() => unFollow(m.id)}>Unfollow</button> :

@@ -4,7 +4,7 @@
 const News = () => {
     return (
         <div>
-            dfdffdv
+            news
         </div>
     )
 }

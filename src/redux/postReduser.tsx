@@ -1,4 +1,15 @@
-import { postPagesDataType} from "./store";
+
+export type postsType = {
+    id: number
+    text: string
+    likeCount: number
+}
+
+export type postPagesDataType = {
+    postsdata: Array<postsType>
+    nextPost: string
+    profile:any
+}
 
 const initionalState: postPagesDataType = {
     postsdata: [
@@ -7,6 +18,7 @@ const initionalState: postPagesDataType = {
         {id: 3, text: "dontLike", likeCount: 125},
     ],
     nextPost: "",
+    profile:null
 }
 type ActionsALLTypes = addPostType | changePostType | ProfileTypeAC
 
@@ -42,17 +54,20 @@ export const PostReduser = (state = initionalState, action: ActionsALLTypes): po
             } : state
             return copyState
         }
+        case "SET-USERS-PROFILE":{
+            return{...state, profile:action.profile}
+        }
         default:
             return state
     }
 }
 
 export const addPostAc = (): addPostType => ({type: "ADD-POST"})
-export const setProfileAc = (profile:string)=> {
+export const setUsersProfile = (profile:string)=> {
     return {
-        type: "ADD-POST", profile
+        type: "SET-USERS-PROFILE", profile
     }
 }
-export const chengePostAc = (text: string): changePostType => ({type: "CHANGE-TEXT-AREA", text: text})
+export const chengePostAc = (text: string): changePostType => ({type: "CHANGE-TEXT-AREA", text})
 
 
