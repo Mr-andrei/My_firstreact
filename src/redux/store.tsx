@@ -65,54 +65,54 @@ export type ChangeMessageText = {
 export type dialogsData ={
     type:"DIALOGS-DATA"}
 
-
-export let store: storeType = {
-    state: {
-        dialogPages: {
-            dialogsData: [
-                {id: 1, name: "Andrei"},
-                {id: 2, name: "Nick"},
-                {id: 3, name: "Olga"},
-                {id: 4, name: "Dimych"},
-                {id: 5, name: "Vika"},
-            ]
-        },
-        messagesPages: {
-            messageData: [
-                {id: 1, message: "What do yo want"},
-                {id: 2, message: "What is yor name"},
-                {id: 3, message: "How are you"},
-                {id: 4, message: "My name is..."},
-                {id: 5, message: "Hi"},
-            ],
-            nextMessage: "",
-        },
-        postPagesData: {
-            postsdata: [
-                {id: 1, text: "like", likeCount: 123},
-                {id: 2, text: "yo", likeCount: 124},
-                {id: 3, text: "dontLike", likeCount: 125},
-            ],
-            nextPost: "",
-        },
-    },
-    getState() {
-        return this.state
-    },
-    subscribe(observer: (state: stateType) => void) {
-        renderChange = observer
-    },
-    dispatch(action) {
-        // Добавление поста в постах
-         this.state.postPagesData = PostReduser(this.state.postPagesData, action)
-
-        //сообщение в messegas
-        this.state.messagesPages = messageReducer(this.state.messagesPages, action)
-
-
-        renderChange(this.state)
-    },
-}
-
-
+//
+// export let store: storeType = {
+//     state: {
+//         dialogPages: {
+//             dialogsData: [
+//                 {id: 1, name: "Andrei"},
+//                 {id: 2, name: "Nick"},
+//                 {id: 3, name: "Olga"},
+//                 {id: 4, name: "Dimych"},
+//                 {id: 5, name: "Vika"},
+//             ]
+//         },
+//         messagesPages: {
+//             messageData: [
+//                 {id: 1, message: "What do yo want"},
+//                 {id: 2, message: "What is yor name"},
+//                 {id: 3, message: "How are you"},
+//                 {id: 4, message: "My name is..."},
+//                 {id: 5, message: "Hi"},
+//             ],
+//             nextMessage: "",
+//         },
+//         postPagesData: {
+//             postsdata: [
+//                 {id: 1, text: "like", likeCount: 123},
+//                 {id: 2, text: "yo", likeCount: 124},
+//                 {id: 3, text: "dontLike", likeCount: 125},
+//             ],
+//             nextPost: "",
+//         },
+//     },
+//     getState() {
+//         return this.state
+//     },
+//     subscribe(observer: (state: stateType) => void) {
+//         renderChange = observer
+//     },
+//     dispatch(action) {
+//         // Добавление поста в постах
+//          this.state.postPagesData = PostReduser(this.state.postPagesData, action)
+//
+//         //сообщение в messegas
+//         this.state.messagesPages = messageReducer(this.state.messagesPages, action)
+//
+//
+//         renderChange(this.state)
+//     },
+// }
+//
+//
 

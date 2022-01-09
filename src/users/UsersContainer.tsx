@@ -8,12 +8,10 @@ import {
 } from "../redux/usersReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
-import {Dispatch} from "redux";
-
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
-import {Loader} from "../componets/loader/Loader";
+
 
 type UsersPropsType = {
     follow: (id: number) => void
@@ -98,27 +96,38 @@ const mapStateToProps = (state: RootStateType):MSTPType => {
 }
 
 
-const mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
-    return {
-        follow: (id: number) => {
-            dispatch(followAC(id))
-        },
-        unFollow: (id: number) => {
-            dispatch(unFollowAC(id))
-        },
-        setState: (state:Array<PersonType>) => {
-            dispatch(setUserUAC (state))
-        },
-        currentPagePlus : (current:number)=> {
-            dispatch(currentPagePlusAC(current))
-        },
-        SetTotalUserCount: (count :number) => {
-            dispatch(SetTotalUserCountAC(count))
-        },
-        setLoader(loading: boolean){
-        dispatch(preloadertAC (loading))}
+// const mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
+//     return {
+//         follow: (id: number) => {
+//             dispatch(followAC(id))
+//         },
+//         unFollow: (id: number) => {
+//             dispatch(unFollowAC(id))
+//         },
+//         setState: (state:Array<PersonType>) => {
+//             dispatch(setUserUAC (state))
+//         },
+//         currentPagePlus : (current:number)=> {
+//             dispatch(currentPagePlusAC(current))
+//         },
+//         SetTotalUserCount: (count :number) => {
+//             dispatch(SetTotalUserCountAC(count))
+//         },
+//         setLoader(loading: boolean){
+//         dispatch(preloadertAC (loading))}
+//
+//     }
+// }
+
+export default connect(mapStateToProps,
+    {
+        follow: followAC,
+        unFollow:unFollowAC,
+        setState: setUserUAC ,
+        currentPagePlus :currentPagePlusAC,
+        SetTotalUserCount: SetTotalUserCountAC,
+        setLoader :preloadertAC,
 
     }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersC)
+    )(UsersC)

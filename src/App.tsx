@@ -8,7 +8,8 @@ import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
 import {MessageContainer} from "./Massages/ContainerDialogs";
 import UsersContainer from "./users/UsersContainer";
-import ProfileContainerCL from "./Profile/ProfileContainerCl";
+import Profile from "./Profile/Profile";
+
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
                 <div className={"content"}>
                     <Route path='/Dialogs'
                            render={() => <MessageContainer/>}/>
-                    <Route path='/Profile' render={() => <ProfileContainerCL/>}/>
+                    <Route path='/Profile' render={() => <Profile/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Setting' render={() => <Setting/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
