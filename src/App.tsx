@@ -21,7 +21,7 @@ function App() {
                 <div className={"content"}>
                     <Route path='/Dialogs'
                            render={() => <MessageContainer/>}/>
-                    <Route path='/Profile' render={() => <ProfileContainer/>}/>
+                    <Route path='/Profile/:userId' render={() => <ProfileContainer/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Setting' render={() => <Setting/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
