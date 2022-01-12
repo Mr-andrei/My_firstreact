@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./Header/Header";
 import NavBar from "./NavBar/NavBar";
 import {Route} from "react-router-dom";
 import News from "./News/News";
@@ -9,6 +8,7 @@ import Music from "./Music/Music";
 import {MessageContainer} from "./Massages/ContainerDialogs";
 import UsersContainer from "./users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import HeaderContainer from "./Header/HeaderContainer";
 
 
 
@@ -16,7 +16,7 @@ function App() {
     return (
 
             <div className="grid_container">
-                <Header/>
+                <HeaderContainer/>
                 <NavBar/>
                 <div className={"content"}>
                     <Route path='/Dialogs'
