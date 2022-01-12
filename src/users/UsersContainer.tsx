@@ -23,15 +23,20 @@ type UsersPropsType = {
     currentPage: number
     currentPagePlus: (current: number) => void
     SetTotalUserCount: (count: number) => void
-    setLoader : (loading: boolean) => void
+    setLoader: (loading: boolean) => void
     preloader: boolean
 }
+
 class UsersC extends React.Component<UsersPropsType> {
 
 
     componentDidMount() {
         this.props.setLoader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            }
+            ).then(response => {
             this.props.setLoader(false)
             this.props.setState(response.data.items)
             this.props.SetTotalUserCount(response.data.totalCount)
@@ -41,25 +46,29 @@ class UsersC extends React.Component<UsersPropsType> {
     onsetPages = (current: number) => {
         this.props.setLoader(true)
         this.props.currentPagePlus(current)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${current}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${current}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            })
+            .then(response => {
             this.props.setLoader(false)
             this.props.setState(response.data.items)
         })
     }
 
     render() {
-        return   (
-        <Users
-            follow={this.props.follow}
-            unFollow={this.props.unFollow}
-            users={this.props.users}
-            pageSize={this.props.pageSize}
-            totalCount={this.props.totalCount}
-            currentPage={this.props.currentPage}
-            onsetPages={this.onsetPages}
-            preloader={this.props.preloader}
+        return (
+            <Users
+                follow={this.props.follow}
+                unFollow={this.props.unFollow}
+                users={this.props.users}
+                pageSize={this.props.pageSize}
+                totalCount={this.props.totalCount}
+                currentPage={this.props.currentPage}
+                onsetPages={this.onsetPages}
+                preloader={this.props.preloader}
 
-        />
+            />
         )
     }
 
@@ -69,23 +78,23 @@ class UsersC extends React.Component<UsersPropsType> {
 type MSTPType = {
     users: Array<PersonType>
     pageSize: number
-    totalCount:number
+    totalCount: number
     currentPage: number
-    preloader:boolean
+    preloader: boolean
 }
 export type MDTPType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
-    setState:(state:Array<PersonType>) => void
-    currentPagePlus : (current:number)=> void
-    SetTotalUserCount : (count:number) => void
-    setLoader : (loading: boolean) => void
+    setState: (state: Array<PersonType>) => void
+    currentPagePlus: (current: number) => void
+    SetTotalUserCount: (count: number) => void
+    setLoader: (loading: boolean) => void
 
 }
 
 export type UsersContainerType = MSTPType & MDTPType
 
-const mapStateToProps = (state: RootStateType):MSTPType => {
+const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         users: state.usersPages.users,
         pageSize: state.usersPages.pageSize,
@@ -122,12 +131,11 @@ const mapStateToProps = (state: RootStateType):MSTPType => {
 export default connect(mapStateToProps,
     {
         follow: followAC,
-        unFollow:unFollowAC,
-        setState: setUserUAC ,
-        currentPagePlus :currentPagePlusAC,
+        unFollow: unFollowAC,
+        setState: setUserUAC,
+        currentPagePlus: currentPagePlusAC,
         SetTotalUserCount: SetTotalUserCountAC,
-        setLoader :preloadertAC,
+        setLoader: preloadertAC,
 
     }
-
-    )(UsersC)
+)(UsersC)

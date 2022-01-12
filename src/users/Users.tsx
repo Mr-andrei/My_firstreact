@@ -4,6 +4,7 @@ import s from "./users.module.css";
 import {PersonType} from "../redux/usersReducer";
 import {Loader} from "../componets/loader/Loader";
 import { NavLink } from 'react-router-dom'
+import axios from "axios";
 
 
 type propsType = {
@@ -42,8 +43,32 @@ const Users = ({
         </NavLink>
         <h5>{m.name}</h5>
         <span>{m.status}</span>
-        <div>{m.follow ? <button onClick={() => unFollow(m.id)}>Unfollow</button> :
-            <button onClick={() => follow(m.id)}>Follow</button>}  </div>
+        <div>{m.follow ?
+            <button onClick={() =>{
+                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}` , {
+                    withCredentials:true,
+                    headers: {
+                        "API-KEY":"d832e30a-b023-4ff8-b5a8-9ef96cfd6279"
+                    }})
+                    .then(response => {
+                        if(response.data.resultCode === 0){
+                            unFollow(m.id)
+                        }
+                })}}
+            >Unfollow</button>
+            :
+            <button onClick={() =>{
+                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}` , {}, {
+                    withCredentials:true,
+                    headers: {
+                        "API-KEY":"d832e30a-b023-4ff8-b5a8-9ef96cfd6279"
+                    }
+                })
+                    .then(response => {
+                        if(response.data.resultCode === 0){
+                           follow(m.id)
+                        }
+                    })}}>Follow</button>}  </div>
         <div>
             <span>{"m.place.country"}</span>
             <span>{"m.place.city"}</span>
