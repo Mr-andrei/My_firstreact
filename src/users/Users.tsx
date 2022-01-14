@@ -44,7 +44,7 @@ const Users = ({
         <h5>{m.name}</h5>
         <span>{m.status}</span>
         <div>{m.follow ?
-            <button onClick={() =>{
+            <button  onClick={() =>{
                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}` , {
                     withCredentials:true,
                     headers: {
@@ -65,9 +65,10 @@ const Users = ({
                     }
                 })
                     .then(response => {
-                        if(response.data.resultCode === 0){
-                           follow(m.id)
-                        }
+                        // if(response.data.resultCode === 0){
+                        //
+                        // }
+                        follow(m.id)
                     })}}>Follow</button>}  </div>
         <div>
             <span>{"m.place.country"}</span>

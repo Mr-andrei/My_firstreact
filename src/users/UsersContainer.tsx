@@ -11,6 +11,7 @@ import {RootStateType} from "../redux/redux-store";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
+import {userApi} from "../api/api";
 
 
 type UsersPropsType = {
@@ -32,27 +33,25 @@ class UsersC extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.setLoader(true)
+        userApi.getUsers(this.props.currentPage,this.props.pageSize)
+
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
             {
                 withCredentials: true
             }
-            ).then(response => {
+            ).then(data => {
             this.props.setLoader(false)
-            this.props.setState(response.data.items)
-            this.props.SetTotalUserCount(response.data.totalCount)
+            this.props.setState(data.data.items)
+            this.props.SetTotalUserCount(data.data.totalCount)
         })
     }
 
     onsetPages = (current: number) => {
         this.props.setLoader(true)
         this.props.currentPagePlus(current)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${current}&count=${this.props.pageSize}`,
-            {
-                withCredentials: true
-            })
-            .then(response => {
+        userApi.getUsers(current,this.props.pageSize).then(data => {
             this.props.setLoader(false)
-            this.props.setState(response.data.items)
+            this.props.setState(data.data.items)
         })
     }
 
