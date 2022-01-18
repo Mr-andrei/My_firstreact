@@ -3,7 +3,7 @@ import images from "./images/images.jpg"
 import s from "./users.module.css";
 import {PersonType} from "../redux/usersReducer";
 import {Loader} from "../componets/loader/Loader";
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import axios from "axios";
 
 
@@ -16,6 +16,8 @@ type propsType = {
     currentPage: number
     onsetPages: (current: number) => void
     preloader: boolean
+    setIsFollowing:  (isFollow:boolean,userId:number) => void
+    isFollow: Array<number>
 
 }
 
@@ -28,7 +30,10 @@ const Users = ({
                    pageSize,
                    totalCount,
                    currentPage,
-                   onsetPages
+                   onsetPages,
+                   setIsFollowing,
+                   isFollow
+
                }: propsType) => {
 
 
@@ -39,47 +44,58 @@ const Users = ({
     }
     let mainUsers = users.map(m => <div>
         <NavLink to={"./profile/" + m.id}>
-        <img src={m.photos.small != null  ? m.photos.small : images} alt=""/>
+            <img src={m.photos.small != null ? m.photos.small : images} alt=""/>
         </NavLink>
         <h5>{m.name}</h5>
         <span>{m.status}</span>
         <div>{m.follow ?
-            <button  onClick={() =>{
-                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}` , {
-                    withCredentials:true,
+            <button disabled={isFollow.some(s => s === m.id)} onClick={() => {
+                setIsFollowing(true,m.id)
+
+                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {
+                    withCredentials: true,
                     headers: {
-                        "API-KEY":"d832e30a-b023-4ff8-b5a8-9ef96cfd6279"
-                    }})
-                    .then(response => {
-                        if(response.data.resultCode === 0){
-                            unFollow(m.id)
-                        }
-                })}}
-            >Unfollow</button>
-            :
-            <button onClick={() =>{
-                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}` , {}, {
-                    withCredentials:true,
-                    headers: {
-                        "API-KEY":"d832e30a-b023-4ff8-b5a8-9ef96cfd6279"
+                        "API-KEY": "d832e30a-b023-4ff8-b5a8-9ef96cfd6279"
                     }
                 })
                     .then(response => {
-                        // if(response.data.resultCode === 0){
-                        //
-                        // }
+                        if (response.data.resultCode === 0) {
+                            unFollow(m.id)
+                        }
+                        setIsFollowing(false,m.id)
+                    })
+            }}
+            >Unfollow</button>
+            :
+            <button disabled={isFollow.some(s => s === m.id)} onClick={() => {
+                setIsFollowing(true,m.id)
+                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {}, {
+                    withCredentials: true,
+                    headers: {
+                        "API-KEY": "d832e30a-b023-4ff8-b5a8-9ef96cfd6279"
+                    }
+                })
+                    .then(response => {
+                        if(response.data.resultCode === 0){
+
+                        }
                         follow(m.id)
-                    })}}>Follow</button>}  </div>
+                        setIsFollowing(false,m.id)
+                    })
+            }}>Follow</button>}  </div>
         <div>
             <span>{"m.place.country"}</span>
             <span>{"m.place.city"}</span>
         </div>
     </div>)
     let pages = page.map(m => {
-        return <span onClick={(e) => {onsetPages(m)}}
+        return <span onClick={(e) => {
+            onsetPages(m)
+        }}
                      className={currentPage === m ? s.count_list : s.normal_numb}>
                          {m}
-                     </span>})
+                     </span>
+    })
 
     let loaderUsers = preloader ? <Loader/> : mainUsers
 

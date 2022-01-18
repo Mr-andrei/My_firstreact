@@ -20,15 +20,6 @@ export const userApi = {
     }
 }
 
-// export function getUsers (currentPage:number,pageSize:number) {
-//  return (    instance.get(`users?page=${currentPage}&count=${pageSize}`,)
-//          . then (response => {
-//             return response.data
-//      })
-//  )
-// }
-
-
 export function getUsersFollow (currentPage:number,pageSize:number) {
     return (    instance.get(`follow?page=${currentPage}&count=${pageSize}`,
             ). then (response => {

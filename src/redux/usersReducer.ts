@@ -2,7 +2,7 @@ type PlaceType = {
     country: string
     city: string
 }
-type fotoType = {
+type photoType = {
     small: string
 }
 export type PersonType = {
@@ -11,7 +11,7 @@ export type PersonType = {
     name: string
     status: string
     place: PlaceType
-    photos: fotoType
+    photos: photoType
 }
 export type InitialStateType = {
     users: Array<PersonType>
@@ -19,33 +19,34 @@ export type InitialStateType = {
     totalCount: number
     currentPage: number
     preloader: boolean
+    ifFollowing: Array<number>
 }
 const initialState: InitialStateType = {
     users: [],
     pageSize: 5,
     totalCount: 0,
     currentPage: 1,
-    preloader: false
+    preloader: false,
+    ifFollowing: []
 }
 
 type  AllActionType = SetUserACType | FollowACType
     | unFollowACType | currentPagePlusType
-    | SetTotalUserCountType | PreloaderType
+    | SetTotalUserCountType | PreloaderType | ifFollowingSetType
 
 export let usersReducer = (state = initialState, action: AllActionType): InitialStateType => {
     switch (action.type) {
         case 'FOLLOW': {
-            let copyState = {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: true} : m)}
-            return copyState
+
+            return {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: true} : m)}
         }
         case 'UN-FOLLOW' : {
-            let copyState = {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: false} : m)}
-            return copyState
+
+            return {...state, users: state.users.map(m => m.id === action.id ? {...m, follow: false} : m)}
 
         }
         case 'SET-USERS' : {
-            let copyState = {...state, users: action.state}
-            return copyState
+            return {...state, users: action.state}
 
         }
         case "CURRENT-PAGE-PLUS" : {
@@ -56,6 +57,10 @@ export let usersReducer = (state = initialState, action: AllActionType): Initial
         }
         case "LOADER" : {
             return {...state, preloader:action.loading}
+        }
+        case "IS-FOLLOWING-SET": {
+            return {...state, ifFollowing:
+                action.isFollow ?  [...state.ifFollowing, action.userId] : state.ifFollowing.filter(f => f !== action.userId)}
         }
 
         default:
@@ -109,5 +114,13 @@ export const preloadertAC = (loading: boolean) => {
     return {
         type: "LOADER",
         loading
+    } as const
+}
+export type ifFollowingSetType  =  ReturnType<typeof ifFollowingSetAC>
+export const ifFollowingSetAC = (isFollow:boolean,userId:number) => {
+    return{
+        type: "IS-FOLLOWING-SET",
+        isFollow,
+        userId
     } as const
 }
