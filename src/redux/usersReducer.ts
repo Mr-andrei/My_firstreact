@@ -1,3 +1,6 @@
+import {userApi} from "../api/api";
+import {Dispatch} from "redux";
+
 type PlaceType = {
     country: string
     city: string
@@ -56,11 +59,13 @@ export let usersReducer = (state = initialState, action: AllActionType): Initial
             return {...state, totalCount: action.count / 1000}
         }
         case "LOADER" : {
-            return {...state, preloader:action.loading}
+            return {...state, preloader: action.loading}
         }
         case "IS-FOLLOWING-SET": {
-            return {...state, ifFollowing:
-                action.isFollow ?  [...state.ifFollowing, action.userId] : state.ifFollowing.filter(f => f !== action.userId)}
+            return {
+                ...state, ifFollowing:
+                    action.isFollow ? [...state.ifFollowing, action.userId] : state.ifFollowing.filter(f => f !== action.userId)
+            }
         }
 
         default:
@@ -116,11 +121,23 @@ export const preloadertAC = (loading: boolean) => {
         loading
     } as const
 }
-export type ifFollowingSetType  =  ReturnType<typeof ifFollowingSetAC>
-export const ifFollowingSetAC = (isFollow:boolean,userId:number) => {
-    return{
+export type ifFollowingSetType = ReturnType<typeof ifFollowingSetAC>
+export const ifFollowingSetAC = (isFollow: boolean, userId: number) => {
+    return {
         type: "IS-FOLLOWING-SET",
         isFollow,
         userId
     } as const
 }
+
+type DispatchType = Dispatch<AllActionType>
+export const getUsersThunkCreator = (currentPage:number,pageSize:number) => {
+   return (dispatch: DispatchType) => {
+    dispatch(preloadertAC(true))
+    userApi.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(preloadertAC(false))
+            dispatch(setUserUAC(data.items))
+            dispatch(SetTotalUserCountAC(data.totalCount))
+        })
+}}
