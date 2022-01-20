@@ -131,13 +131,42 @@ export const ifFollowingSetAC = (isFollow: boolean, userId: number) => {
 }
 
 type DispatchType = Dispatch<AllActionType>
-export const getUsersThunkCreator = (currentPage:number,pageSize:number) => {
-   return (dispatch: DispatchType) => {
-    dispatch(preloadertAC(true))
-    userApi.getUsers(currentPage, pageSize)
-        .then(data => {
-            dispatch(preloadertAC(false))
-            dispatch(setUserUAC(data.items))
-            dispatch(SetTotalUserCountAC(data.totalCount))
-        })
-}}
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: DispatchType) => {
+        dispatch(preloadertAC(true))
+        userApi.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(preloadertAC(false))
+                dispatch(setUserUAC(data.items))
+                dispatch(SetTotalUserCountAC(data.totalCount))
+            })
+    }
+}
+
+export const followTC = (userId: number) => {
+    return (dispatch:DispatchType)=>{
+        dispatch(ifFollowingSetAC(true, userId))
+        userApi.follow(userId)
+            .then(response => {
+                if(response.data.resultCode === 0){
+                }
+               dispatch( followAC(userId))
+                dispatch(ifFollowingSetAC(false, userId))
+            })
+    }
+}
+
+
+export const unFollowTC = (userId: number) => {
+    return (dispatch: DispatchType) => {
+        dispatch(ifFollowingSetAC(true, userId))
+        userApi.unFollow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(unFollowAC(userId))
+                }
+                dispatch(ifFollowingSetAC(false, userId))
+            })
+
+    }
+}
