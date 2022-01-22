@@ -12,8 +12,7 @@ const Header = (props:PropsType) => {
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhWZaRjwM9R43lRrNdwcRIVn82mamutm6yNQ&usqp=CAU" alt=""/>
 
             <div className={cl.link_login}>
-                {props.isAuth ?   "" : <NavLink to='/login'> Login</NavLink>}
-                <span> {props.login}</span>
+                {props.isAuth ?   <span> {props.login}</span> : <NavLink to='/login'> Login</NavLink>}
             </div>
 
         </div>

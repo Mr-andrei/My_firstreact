@@ -24,6 +24,15 @@ export const userApi = {
     unFollow(userId: number) {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
     },
+    getProfile (userId:string){
+      return   instance.get(`https://social-network.samuraijs.com/api/1.0/profile/ `+ userId);
+    },
+
+}
+
+export const authApi ={
+    getAuthMe(){
+        return  instance.get(`auth/me`);}
 }
 
 // export function getUsersFollow (currentPage:number,pageSize:number) {

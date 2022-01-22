@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {userApi} from "../api/api";
+
 
 export type postsType = {
     id: number
@@ -47,12 +50,11 @@ export const PostReduser = (state = initionalState, action: ActionsALLTypes): po
                 text: state.nextPost,
                 likeCount: 1
             }
-            let copyState = newPost.text ? {
+            return  newPost.text ?{
                 ...state,
                 postsdata: [...state.postsdata, newPost],
                 nextPost: ""
             } : state
-            return copyState
         }
         case "SET-USERS-PROFILE":{
             return{...state, profile:action.profile}
@@ -63,11 +65,23 @@ export const PostReduser = (state = initionalState, action: ActionsALLTypes): po
 }
 
 export const addPostAc = (): addPostType => ({type: "ADD-POST"})
-export const setUsersProfile = (profile:string)=> {
+export const setUsersProfile = (profile:string) : ProfileTypeAC=> {
     return {
         type: "SET-USERS-PROFILE", profile
     }
 }
-export const chengePostAc = (text: string): changePostType => ({type: "CHANGE-TEXT-AREA", text})
 
+export const changePostAc = (text: string): changePostType => ({type: "CHANGE-TEXT-AREA", text})
+
+
+type DispatchType = Dispatch<ActionsALLTypes>
+export const getProfileTC = (userId:string) => {
+    return (dispatch: DispatchType) =>{
+        // let userId = this.props.match.params.userId
+        userApi.getProfile(userId)
+            .then(response => {
+               dispatch(setUsersProfile(response.data))
+            })
+      }
+}
 

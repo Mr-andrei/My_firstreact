@@ -1,3 +1,6 @@
+import {authApi} from "../api/api";
+import {Dispatch} from "redux";
+
 export type InitialStateType = {
     id: number
     email: string
@@ -47,4 +50,15 @@ export const setUserData = ( id:number,email:string,login:string ) : setUserData
 
         }
     }
+}
+type DispatchType = Dispatch<AllActionType>
+export const logAuthUserTC = () => {
+    return (dispatch: DispatchType) =>{
+    authApi.getAuthMe()
+        .then(response => {
+            if(response.data.resultCode === 0){
+                let {id, email,login } = response.data.data
+                dispatch(setUserData(id, email,login ))
+            }
+        })}
 }

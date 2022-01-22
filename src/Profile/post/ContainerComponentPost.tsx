@@ -1,6 +1,6 @@
-import {ActionsTypes, postsType, stateType,} from "../../redux/store";
+import {ActionsTypes, postsType} from "../../redux/store";
 import "./profile.css"
-import {addPostAc, chengePostAc} from "../../redux/postReduser";
+import {addPostAc, changePostAc} from "../../redux/postReduser";
 import {Post} from "./post";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
@@ -27,7 +27,7 @@ let mapDispatchToProps = (dispatch:(action: ActionsTypes) => void) => {
             dispatch(addPostAc())},
 
         changePost : (text:string) => {
-            dispatch(chengePostAc(text))}
+            dispatch(changePostAc(text))}
 
     }
 }
