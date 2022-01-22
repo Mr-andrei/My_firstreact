@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import cl from './NavBar.module.css'
-import {Loader} from "../componets/loader/Loader";
+
 const NavBar = () =>{
     return (
         <div className={cl.nav_bar} >
@@ -10,6 +10,7 @@ const NavBar = () =>{
             <div className={cl.navLink}><NavLink to="/Music" activeClassName={cl.active_link}>Music</NavLink></div>
             <div className={cl.navLink}><NavLink to="/Setting" activeClassName={cl.active_link}>Setting</NavLink></div>
            <div className={cl.navLink}> <NavLink to='/Users' activeClassName={cl.active_link}>Users</NavLink></div>
+           <div className={cl.navLink}> <NavLink to='/Login' activeClassName={cl.active_link}>Login</NavLink></div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 import cl from './Dialogs.module.css'
 import { dialogsDataType, messageDataType} from "../redux/store";
 import React, {ChangeEvent,KeyboardEvent} from "react";
@@ -15,6 +15,7 @@ type DialogItemPropsType = {
     name: string
 }
 type statePropsType = {
+    isAuth: boolean
     dialog: Array<dialogsDataType>
     message: Array<messageDataType>
     nextMessage: string
@@ -53,11 +54,12 @@ const Dialogs = (props: statePropsType) => {
     }
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const changeMessege = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value
         props.changeMassage(postText)
     }
 
+    if (!props.isAuth ) return <Redirect to={"/Login"}/>
     return (
 
         <div className={cl.container}>
@@ -69,7 +71,7 @@ const Dialogs = (props: statePropsType) => {
             </div>
             <textarea
                 ref={newPostElement}
-                onChange={changeMessege}
+                onChange={changeMessage}
                 value={props.nextMessage}
                 onKeyPress={addMessageOnkeyPress}
             ></textarea>

@@ -9,6 +9,7 @@ import {MessageContainer} from "./Massages/ContainerDialogs";
 import UsersContainer from "./users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./Header/HeaderContainer";
+import Login from "./login/Login";
 
 
 
@@ -26,6 +27,7 @@ function App() {
                     <Route path='/Setting' render={() => <Setting/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Users' render={() => <UsersContainer  />}/>
+                    <Route path='/Login' render={() => <Login  />}/>
                 </div>
             </div>
 

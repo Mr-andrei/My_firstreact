@@ -4,17 +4,17 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileTC} from "../redux/postReduser";
 import {RootStateType} from "../redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 
-
-type ProfileContainerType =  mapStateToPropsType & mapDispatchToProps
+type ProfileContainerType = mapStateToPropsType & mapDispatchToProps
 
 type  mapStateToPropsType = {
     profile: any
+    isAuth: boolean
 }
 type mapDispatchToProps = {
-    getProfileTC:(userId:string) => void
+    getProfileTC: (userId: string) => void
 }
 
 // типизация визроут
@@ -24,28 +24,30 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 
 
+class ProfileContainer extends React.Component<PropsType> {
 
-class ProfileContainer extends React.Component<PropsType>{
-
-        componentDidMount() {
-            this.props.getProfileTC(this.props.match.params.userId)
-        }
+    componentDidMount() {
+        this.props.getProfileTC(this.props.match.params.userId)
+    }
 
 
-    render(){
-    return (
-        <div className={cl.profile}>
-            <Profile  profile = {this.props.profile}/>
-        </div>
-    )}
+    render() {
+        if (!this.props.isAuth ) return <Redirect to={"/Login"}/>
+        return (
+            <div className={cl.profile}>
+                <Profile profile={this.props.profile}/>
+            </div>
+        )
+    }
 }
 
-const mapStateToProps = (state:RootStateType):mapStateToPropsType => ({
-   profile: state.postPagesData.profile
+const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
+    profile: state.postPagesData.profile,
+    isAuth: state.auth.isAuth
 })
 
- let WithRouterContainerComponent = withRouter(ProfileContainer)
+let WithRouterContainerComponent = withRouter(ProfileContainer)
 
 export default connect(mapStateToProps, {
     getProfileTC
-}) (WithRouterContainerComponent)
+})(WithRouterContainerComponent)
