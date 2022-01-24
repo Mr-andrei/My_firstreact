@@ -21,8 +21,8 @@ type  AllActionType = setUserDataACType
 
 export let authReducer = (state = initialState, action: AllActionType): InitialStateType => {
     switch (action.type) {
-        case "SET-USER-DATA":{
-            return {...state, ...action.data, isAuth:true}
+        case "SET-USER-DATA": {
+            return {...state, ...action.data, isAuth: true}
         }
 
         default:
@@ -32,7 +32,7 @@ export let authReducer = (state = initialState, action: AllActionType): InitialS
 
 
 type setUserDataACType = {
-    type : "SET-USER-DATA"
+    type: "SET-USER-DATA"
     data: {
         id: number
         email: string
@@ -40,8 +40,8 @@ type setUserDataACType = {
 
     }
 }
-export const setUserData = ( id:number,email:string,login:string ) : setUserDataACType  => {
-    return{
+export const setUserData = (id: number, email: string, login: string): setUserDataACType => {
+    return {
         type: "SET-USER-DATA",
         data: {
             id,
@@ -53,12 +53,13 @@ export const setUserData = ( id:number,email:string,login:string ) : setUserData
 }
 type DispatchType = Dispatch<AllActionType>
 export const logAuthUserTC = () => {
-    return (dispatch: DispatchType) =>{
-    authApi.getAuthMe()
-        .then(response => {
-            if(response.data.resultCode === 0){
-                let {id, email,login } = response.data.data
-                dispatch(setUserData(id, email,login ))
-            }
-        })}
+    return (dispatch: DispatchType) => {
+        authApi.getAuthMe()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    let {id, email, login} = response.data.data
+                    dispatch(setUserData(id, email, login))
+                }
+            })
+    }
 }

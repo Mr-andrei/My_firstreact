@@ -1,4 +1,4 @@
-import {NavLink, Redirect} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import cl from './Dialogs.module.css'
 import { dialogsDataType, messageDataType} from "../redux/store";
 import React, {ChangeEvent,KeyboardEvent} from "react";
@@ -59,7 +59,7 @@ const Dialogs = (props: statePropsType) => {
         props.changeMassage(postText)
     }
 
-    if (!props.isAuth ) return <Redirect to={"/Login"}/>
+
     return (
 
         <div className={cl.container}>

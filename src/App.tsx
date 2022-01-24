@@ -12,24 +12,23 @@ import HeaderContainer from "./Header/HeaderContainer";
 import Login from "./login/Login";
 
 
-
 function App() {
     return (
 
-            <div className="grid_container">
-                <HeaderContainer/>
-                <NavBar/>
-                <div className={"content"}>
-                    <Route path='/Dialogs'
-                           render={() => <MessageContainer/>}/>
-                    <Route path='/Profile/:userId' render={() => <ProfileContainer/>}/>
-                    <Route path='/News' render={() => <News/>}/>
-                    <Route path='/Setting' render={() => <Setting/>}/>
-                    <Route path='/Music' render={() => <Music/>}/>
-                    <Route path='/Users' render={() => <UsersContainer  />}/>
-                    <Route path='/Login' render={() => <Login  />}/>
-                </div>
+        <div className="grid_container">
+            <HeaderContainer/>
+            <NavBar/>
+            <div className={"content"}>
+                <Route path='/Dialogs'
+                       render={() => <MessageContainer/>}/>
+                <Route path='/Profile/:userId' render={() => <ProfileContainer/>}/>
+                <Route path='/News' render={() => <News/>}/>
+                <Route path='/Setting' render={() => <Setting/>}/>
+                <Route path='/Music' render={() => <Music/>}/>
+                <Route path='/Users' render={() => <UsersContainer/>}/>
+                <Route path='/Login' render={() => <Login/>}/>
             </div>
+        </div>
 
     );
 }
