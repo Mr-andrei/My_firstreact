@@ -4,6 +4,9 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {withAuthRedirect} from "../hoc/whithAuthRedirect";
+import {compose} from "redux";
+import React from "react";
+import {withRouter} from "react-router-dom";
 
 type MSType = {
     dialog: Array<dialogsDataType>
@@ -19,14 +22,14 @@ let mapStateToProps = (state: RootStateType): MSType => {
     }
 }
 
-export const MessageContainer = withAuthRedirect(connect(mapStateToProps, {
-        addMessage: addMessegesAc,
-        changeMassage: chengeMessgesTextAc
-    }
-)(Dialogs))
-
-
-
+export default compose<React.ComponentType>(
+    (connect(mapStateToProps, {
+            addMessage: addMessegesAc,
+            changeMassage: chengeMessgesTextAc
+        })
+    ),
+    withRouter,
+    withAuthRedirect)(Dialogs)
 
 
 

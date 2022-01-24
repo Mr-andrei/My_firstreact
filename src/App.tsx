@@ -5,11 +5,12 @@ import {Route} from "react-router-dom";
 import News from "./News/News";
 import Setting from "./Setting/Setting";
 import Music from "./Music/Music";
-import {MessageContainer} from "./Massages/ContainerDialogs";
 import UsersContainer from "./users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./Header/HeaderContainer";
 import Login from "./login/Login";
+import Dialogs from "./Massages/ContainerDialogs";
+
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <NavBar/>
             <div className={"content"}>
                 <Route path='/Dialogs'
-                       render={() => <MessageContainer/>}/>
+                       render={() => <Dialogs/>}/>
                 <Route path='/Profile/:userId' render={() => <ProfileContainer/>}/>
                 <Route path='/News' render={() => <News/>}/>
                 <Route path='/Setting' render={() => <Setting/>}/>

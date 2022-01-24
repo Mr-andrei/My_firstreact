@@ -6,6 +6,7 @@ import {getProfileTC} from "../redux/postReduser";
 import {RootStateType} from "../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../hoc/whithAuthRedirect";
+import {compose} from "redux";
 
 
 type ProfileContainerType = mapStateToPropsType & mapDispatchToProps
@@ -26,12 +27,9 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 
 
 class ProfileContainer extends React.Component<PropsType> {
-
     componentDidMount() {
         this.props.getProfileTC(this.props.match.params.userId)
     }
-
-
     render() {
 
         return (
@@ -42,12 +40,13 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
     profile: state.postPagesData.profile,
-
 })
 
-let WithRouterContainerComponent = withRouter(ProfileContainer)
+export default  compose<React.ComponentType>(
+    connect(mapStateToProps, {getProfileTC}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 
-export default withAuthRedirect(connect(mapStateToProps, {getProfileTC})(WithRouterContainerComponent))
