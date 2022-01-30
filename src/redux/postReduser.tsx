@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {userApi} from "../api/api";
+import {profileApi} from "../api/api";
 
 
 export type postsType = {
@@ -12,6 +12,7 @@ export type postPagesDataType = {
     postsdata: Array<postsType>
     nextPost: string
     profile:any
+    status:string
 }
 
 const initionalState: postPagesDataType = {
@@ -21,9 +22,10 @@ const initionalState: postPagesDataType = {
         {id: 3, text: "dontLike", likeCount: 125},
     ],
     nextPost: "",
-    profile:null
+    profile:null,
+    status:""
 }
-type ActionsALLTypes = addPostType | changePostType | ProfileTypeAC
+type ActionsALLTypes = addPostType | changePostType | ProfileTypeAC | StatusTypeAC
 
 export type addPostType = {
     type: "ADD-POST"
@@ -59,6 +61,9 @@ export const PostReduser = (state = initionalState, action: ActionsALLTypes): po
         case "SET-USERS-PROFILE":{
             return{...state, profile:action.profile}
         }
+        case "SET-USERS-STATUS":{
+            return { ...state, status:action.status }
+        }
         default:
             return state
     }
@@ -78,10 +83,36 @@ type DispatchType = Dispatch<ActionsALLTypes>
 export const getProfileTC = (userId:string) => {
     return (dispatch: DispatchType) =>{
         // let userId = this.props.match.params.userId
-        userApi.getProfile(userId)
+        profileApi.getProfile(userId)
             .then(response => {
                dispatch(setUsersProfile(response.data))
             })
       }
 }
 
+export type  StatusTypeAC = {
+    type:"SET-USERS-STATUS"
+    status:string
+}
+
+export const setUsersStatus = (status:string) : StatusTypeAC=> {
+    return {
+        type: "SET-USERS-STATUS", status
+    }
+}
+
+export const  getUserStatus = (userId:string) => {
+    return (dispatch:DispatchType) => {
+        profileApi.getStatus(userId).then( res =>
+            dispatch(setUsersStatus(res.data.status))
+        )
+    }
+}
+
+export const  updateStatus = (status:string) => {
+    return (dispatch:DispatchType) => {
+        profileApi.getStatus(userId).then( res =>
+            dispatch(setUsersStatus(res.data.status))
+        )
+    }
+}

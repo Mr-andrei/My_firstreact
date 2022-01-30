@@ -18,15 +18,13 @@ export const userApi = {
         )
     },
     follow(userId: number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,)
+        return instance.post(`follow/${userId}`,)
 
     },
     unFollow(userId: number) {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
     },
-    getProfile (userId:string){
-      return   instance.get(`https://social-network.samuraijs.com/api/1.0/profile/ `+ userId);
-    },
+
 
 }
 
@@ -35,10 +33,14 @@ export const authApi ={
         return  instance.get(`auth/me`);}
 }
 
-// export function getUsersFollow (currentPage:number,pageSize:number) {
-//     return (    instance.get(`follow?page=${currentPage}&count=${pageSize}`,
-//             ). then (response => {
-//             return response.data
-//         })
-//     )
-// }
+export const profileApi = {
+    getProfile (userId:string){
+        return   instance.get(`profile/ `+ userId);
+    },
+    getStatus(userId:string){
+        return instance.get(`status/`+ userId)
+    },
+    updateStatus(status:string){
+        return instance.put(`status/`+ {status:status})
+    },
+}
