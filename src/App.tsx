@@ -13,16 +13,17 @@ import Dialogs from "./Massages/ContainerDialogs";
 
 
 
-function App() {
-    return (
 
+function App() {
+
+    return (
         <div className="grid_container">
             <HeaderContainer/>
             <NavBar/>
             <div className={"content"}>
                 <Route path='/Dialogs'
                        render={() => <Dialogs/>}/>
-                <Route path='/Profile/:userId' render={() => <ProfileContainer/>}/>
+                <Route path=  '/Profile/:userId?' render={() => <ProfileContainer/>}/>
                 <Route path='/News' render={() => <News/>}/>
                 <Route path='/Setting' render={() => <Setting/>}/>
                 <Route path='/Music' render={() => <Music/>}/>
@@ -30,7 +31,6 @@ function App() {
                 <Route path='/Login' render={() => <Login/>}/>
             </div>
         </div>
-
     );
 }
 

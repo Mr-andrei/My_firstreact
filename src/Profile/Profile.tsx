@@ -8,8 +8,7 @@ type ProfilePropsType = {
     profile: any
 }
 
-const Profile = (props:ProfilePropsType) => {
-
+const ProfileL = (props:ProfilePropsType) => {
 
     return (
         <div className={cl.profile}>
@@ -19,4 +18,4 @@ const Profile = (props:ProfilePropsType) => {
     )
 }
 
-export default Profile
+export default ProfileL

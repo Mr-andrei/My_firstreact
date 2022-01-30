@@ -2,7 +2,7 @@ import {authApi} from "../api/api";
 import {Dispatch} from "redux";
 
 export type InitialStateType = {
-    id: number
+    id: number | null
     email: string
     login: string
     isAuth: boolean
@@ -10,7 +10,7 @@ export type InitialStateType = {
 
 
 const initialState: InitialStateType = {
-    id: 0,
+    id: null,
     email: "",
     login: "",
     isAuth: false,
