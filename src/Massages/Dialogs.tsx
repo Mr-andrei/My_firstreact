@@ -3,6 +3,8 @@ import cl from './Dialogs.module.css'
 import {dialogsDataType, messageDataType} from "../redux/store";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../validator/validator";
+import {FormInputControl} from "../componets/formcontrol/FormInputControl";
 
 
 type MessageItemPropsType = {
@@ -85,7 +87,7 @@ const Dialogs = (props: statePropsType) => {
 type AddMessageFormType = {
     message: string
 }
-
+let maxLength = maxLengthCreator(100)
 
 const MessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => {
 
@@ -95,7 +97,8 @@ const MessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => 
                 <Field
                     placeholder={"message"}
                     name={"message"}
-                    component={"input"}
+                    validate={[ required,maxLength]}
+                    component= {FormInputControl}
                     type={"text"}/>
             </div>
             <button>add</button>

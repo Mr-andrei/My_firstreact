@@ -1,0 +1,15 @@
+
+.defaultInput input {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+
+}
+
+
+.errorInput input {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid red 1px;
+}

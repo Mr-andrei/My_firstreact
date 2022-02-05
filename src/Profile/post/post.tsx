@@ -1,7 +1,9 @@
 import {postsType} from "../../redux/store";
-import React, {ChangeEvent} from "react";
+import React from "react";
 import "./profile.css"
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../validator/validator";
+import {FormInputControl} from "../../componets/formcontrol/FormInputControl";
 
 type PostDataPropsType = {
     posts: Array<postsType>
@@ -58,6 +60,7 @@ type AddPostFormType = {
     Post: string
 }
 
+let maxLength = maxLengthCreator(10)
 
 const PostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
 
@@ -65,9 +68,11 @@ const PostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
+
                     placeholder={"Post"}
                     name={"Post"}
-                    component={"input"}
+                    validate={[ required,maxLength]}
+                    component= {FormInputControl}
                     type={"text"}/>
             </div>
             <button>add</button>
