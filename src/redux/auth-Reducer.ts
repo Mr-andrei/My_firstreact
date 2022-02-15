@@ -2,6 +2,7 @@ import {authApi} from "../api/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {AllActionReduxType, RootStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 export type InitialStateType = {
     id: number | null
@@ -74,6 +75,10 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): T
                 if (response.data.resultCode === 0) {
                     dispatch(logAuthUserTC())
                 }
+                // else {
+                //     let action = stopSubmit('login', {email:"Email is wrong"})
+                //     dispatch(action)
+                // }
             })
     }
 }

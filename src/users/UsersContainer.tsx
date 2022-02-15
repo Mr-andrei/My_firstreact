@@ -6,6 +6,14 @@ import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import React from "react";
 import Users from "./Users";
+import {
+    getCurrentPage,
+    getIfFollowing,
+    getPageSize,
+    getPreloader,
+    getTotalUsersCount,
+    getUsers
+} from "../redux/users-selectors";
 
 
 type UsersPropsType = {
@@ -74,12 +82,12 @@ export type UsersContainerType = MSTPType & MDTPType
 
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
-        users: state.usersPages.users,
-        pageSize: state.usersPages.pageSize,
-        totalCount: state.usersPages.totalCount,
-        currentPage: state.usersPages.currentPage,
-        preloader: state.usersPages.preloader,
-        isFollow: state.usersPages.ifFollowing,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        preloader: getPreloader(state),
+        isFollow: getIfFollowing(state),
     }
 }
 export default connect(mapStateToProps,

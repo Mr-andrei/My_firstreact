@@ -132,7 +132,9 @@ export const ifFollowingSetAC = (isFollow: boolean, userId: number) => {
 
 type DispatchType = Dispatch<AllActionType>
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+
     return (dispatch: DispatchType) => {
+        dispatch(currentPagePlusAC(currentPage))
         dispatch(preloadertAC(true))
         userApi.getUsers(currentPage, pageSize)
             .then(data => {
