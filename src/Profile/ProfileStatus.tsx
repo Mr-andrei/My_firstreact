@@ -36,3 +36,8 @@ export const ProfileStatus = ({title, updateStatus}: ProfileStatusType) => {
             </div>
         )
 }
+
+// let c = sumString()
+// c.add(hello)
+// c.add(user)
+// c.getResult() // hello user
